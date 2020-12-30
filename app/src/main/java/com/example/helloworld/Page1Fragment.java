@@ -80,10 +80,21 @@ public class Page1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page1, null) ;
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU) ;
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU) ;
 
-        ListView listview = (ListView) view.findViewById(R.id.listview1);
-        listview.setAdapter(adapter) ;
+        //ListView listview = (ListView) view.findViewById(R.id.listview1);
+        //listview.setAdapter(adapter) ;
+
+        ListView listview;
+        ListViewAdapter adapter = new ListViewAdapter();
+
+        listview = (ListView) view.findViewById(R.id.listview1);
+        listview.setAdapter(adapter);
+
+        for(int i = 0; i< contactList.size() ; i++){
+            Contact mv = contactList.get(i);
+            adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.user), mv.getName(), mv.getPhonenumber());
+        }
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -92,7 +103,7 @@ public class Page1Fragment extends Fragment {
 
                 AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
                 //int id = (int) parent.getItemIdAtPosition(position);
-                Contact con = contactList.get(position-1);
+                Contact con = contactList.get(position);
                 adb.setTitle("Name: " + con.getName());
                 adb.setMessage("PhoneNumber: "
                         + con.getPhonenumber()

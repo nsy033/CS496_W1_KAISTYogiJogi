@@ -38,7 +38,16 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
             R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8,
             R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
-            R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8,
+            R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8
+    };
+    static final int kaist[] = {
+            R.drawable.aerospace, R.drawable.brain, R.drawable.business, R.drawable.chemistry,
+            R.drawable.civil, R.drawable.computer, R.drawable.design, R.drawable.dna,
+            R.drawable.electrical, R.drawable.math, R.drawable.mechanic, R.drawable.nuclear,
+            R.drawable.physics, R.drawable.system
+    };
+    static final String name[] = {
+            "AE", "BBE", "BTM", "CH", "CEE", "CS", "ID", "BS", "EE", "MS", "ME", "NQE", "PH", "ISE"
     };
 
     @Override

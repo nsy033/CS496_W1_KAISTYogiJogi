@@ -107,7 +107,7 @@ public class Page2Fragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             ImageView imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(240, 240));
+            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageView.setPadding(5, 5, 5, 5);
             imageView.setImageResource(img[position]);
