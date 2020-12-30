@@ -120,7 +120,7 @@ public class Page2Fragment extends Fragment {
                     AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                     ImageView ivPoster = (ImageView) dialogView.findViewById(R.id.ivPoster);
                     ivPoster.setImageResource(img[pos]);
-                    //dlg.setTitle("큰 포스터");
+                    //dlg.setTitle("Title");
                     dlg.setIcon(R.drawable.ic_launcher_foreground);
                     dlg.setView(dialogView);
                     dlg.setNegativeButton("CLOSE", null);

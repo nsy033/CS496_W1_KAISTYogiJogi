@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
 
     static ArrayList<String> LIST_MENU = new ArrayList<String>();
-    private ArrayList<Contact> contactList = new ArrayList<Contact>();
+    static ArrayList<Contact> contactList = new ArrayList<Contact>();
     static final int img[] = {
             R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
             R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8,

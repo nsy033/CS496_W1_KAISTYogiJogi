@@ -1,5 +1,6 @@
 package com.example.helloworld;
 
+import android.app.AlertDialog;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 
@@ -9,7 +10,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -22,6 +26,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import static com.example.helloworld.MainActivity.LIST_MENU;
+import static com.example.helloworld.MainActivity.contactList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,6 +85,27 @@ public class Page1Fragment extends Fragment {
         ListView listview = (ListView) view.findViewById(R.id.listview1);
         listview.setAdapter(adapter) ;
 
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long rowId) {
+
+                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                //int id = (int) parent.getItemIdAtPosition(position);
+                Contact con = contactList.get(position-1);
+                adb.setTitle("Name: " + con.getName());
+                adb.setMessage("PhoneNumber: "
+                        + con.getPhonenumber()
+                        + "\nAddress: "
+                        + con.getAddress());
+                adb.setPositiveButton("Ok", null);
+                adb.show();
+
+            }
+        });
+
         return view ;
     }
+
+
 }
