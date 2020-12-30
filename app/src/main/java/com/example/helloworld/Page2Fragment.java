@@ -1,12 +1,19 @@
 package com.example.helloworld;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
+
+import static com.example.helloworld.MainActivity.img;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +66,68 @@ public class Page2Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.page2, container, false);
+        View view = inflater.inflate(R.layout.page2, null);
+
+        MyGridAdapter adapter = new MyGridAdapter(
+                getActivity().getApplicationContext(),
+                R.layout.dialog,       // GridView 항목의 레이아웃 row.xml
+                img);    // 데이터
+
+        GridView gv = (GridView) view.findViewById(R.id.gridView1);
+        gv.setAdapter(adapter);  // 커스텀 아답타를 GridView 에 적용
+
+        return view;
+    }
+
+    public class MyGridAdapter extends BaseAdapter {
+        Context context;
+        int layout;
+        int img[];
+        LayoutInflater inf;
+
+        public MyGridAdapter(Context context, int layout, int[] img) {
+            this.context = context;
+            this.layout = layout;
+            this.img = img;
+            inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        public int getCount() {
+            return img.length;
+        }
+
+        public Object getItem(int position) {
+            return img[position];
+        }
+
+        public long getItemId(int position) {
+            return position;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            ImageView imageView = new ImageView(context);
+            imageView.setLayoutParams(new GridView.LayoutParams(240, 240));
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageView.setPadding(5, 5, 5, 5);
+            imageView.setImageResource(img[position]);
+            final int pos = position;
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    View dialogView = (View) View.inflate(getActivity(), R.layout.dialog, null);
+                    AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+                    ImageView ivPoster = (ImageView) dialogView.findViewById(R.id.ivPoster);
+                    ivPoster.setImageResource(img[pos]);
+                    //dlg.setTitle("큰 포스터");
+                    dlg.setIcon(R.drawable.ic_launcher_foreground);
+                    dlg.setView(dialogView);
+                    dlg.setNegativeButton("CLOSE", null);
+                    dlg.show();
+                }
+            });
+            return imageView;
+        }
     }
 }
