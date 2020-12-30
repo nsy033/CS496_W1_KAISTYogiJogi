@@ -180,7 +180,7 @@ public class fragment1 extends Fragment {
         }
     }
 
-    public fragment1.ListViewAdapter add_item_to_listviewadapter(fragment1.ListViewAdapter myadapter){
+    public ListViewAdapter add_item_to_listviewadapter(ListViewAdapter myadapter){
         String json = "";
         json = getJsonString();
         jsonParsing(json); // arraylist 에 들어가게 됨.
