@@ -13,7 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import static com.example.helloworld.MainActivity.kaist;
+import static com.example.helloworld.MainActivity.department;
 import static com.example.helloworld.MainActivity.name;
 
 /**
@@ -63,74 +63,4 @@ public class Page3Fragment extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.page3, null);
-
-        Page3Fragment.MyGridAdapter adapter = new Page3Fragment.MyGridAdapter(
-                getActivity().getApplicationContext(),
-                R.layout.gridview_item,       // GridView 항목의 레이아웃 custom_grid.xml
-                kaist,
-                name);    // 데이터
-
-        GridView gv = (GridView) view.findViewById(R.id.gridView2);
-        gv.setAdapter(adapter);  // 커스텀 아답타를 GridView 에 적용
-
-        return view;
-    }
-    public class MyGridAdapter extends BaseAdapter {
-        Context context;
-        int layout;
-        int kaist[];
-        String name[];
-        LayoutInflater inf;
-
-        public MyGridAdapter(Context context, int layout, int[] img, String[] name) {
-            this.context = context;
-            this.layout = layout;
-            this.kaist = img;
-            this.name = name;
-            inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        public int getCount() {
-            return kaist.length;
-        }
-
-        public Object getItem(int position) {
-            return kaist[position];
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            ImageView imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(150, 150));
-            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            imageView.setPadding(5, 5, 5, 5);
-            imageView.setImageResource(kaist[position]);
-            final int pos = position;
-
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    View dialogView = (View) View.inflate(getActivity(), R.layout.dialog, null);
-                    AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
-                    ImageView ivPoster = (ImageView) dialogView.findViewById(R.id.ivPoster);
-                    ivPoster.setImageResource(kaist[pos]);
-                    //dlg.setTitle("Title");
-                    dlg.setIcon(R.drawable.ic_launcher_foreground);
-                    dlg.setView(dialogView);
-                    dlg.setNegativeButton("CLOSE", null);
-                    dlg.show();
-                }
-            });
-            return imageView;
-        }
-    }
 }

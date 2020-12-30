@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    static ArrayList<String> LIST_MENU = new ArrayList<String>();
     static ArrayList<Contact> contactList = new ArrayList<Contact>();
     static final int img[] = {
             R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
             R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8
     };
-    static final int kaist[] = {
+    static final int department[] = {
             R.drawable.aerospace, R.drawable.brain, R.drawable.business, R.drawable.chemistry,
             R.drawable.civil, R.drawable.computer, R.drawable.design, R.drawable.dna,
             R.drawable.electrical, R.drawable.math, R.drawable.mechanic, R.drawable.nuclear,
@@ -58,15 +57,6 @@ public class MainActivity extends AppCompatActivity {
         String json = "";
         json = getJsonString();
         jsonParsing(json); // arraylist 에 들어가게 됨.
-        String str = "-";
-        LIST_MENU.add(str);
-
-        for(int i = 0; i< contactList.size() ; i++){
-            Contact mv = contactList.get(i);
-            str = "";
-            str = str + mv.getName() + " " + mv.getPhonenumber() + " " + mv.getAddress();
-            LIST_MENU.add(str);
-        }
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
@@ -119,45 +109,6 @@ public class MainActivity extends AppCompatActivity {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-    }
-
-    static class MyAdapter extends BaseAdapter {
-        Context context;
-        int layout;
-        int img[];
-        LayoutInflater inf;
-
-        public MyAdapter(Context context, int layout, int[] img) {
-            this.context = context;
-            this.layout = layout;
-            this.img = img;
-            inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getCount() {
-            return img.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return img[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView==null)
-                convertView = inf.inflate(layout, null);
-            ImageView iv = (ImageView)convertView.findViewById(R.id.imageView1);
-            iv.setImageResource(img[position]);
-
-            return convertView;
         }
     }
 }

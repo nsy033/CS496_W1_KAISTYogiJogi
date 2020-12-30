@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static com.example.helloworld.MainActivity.LIST_MENU;
 import static com.example.helloworld.MainActivity.contactList;
 
 /**
