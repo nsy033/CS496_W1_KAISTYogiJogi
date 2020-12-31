@@ -48,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
     static final String name[] = {
             "AE", "BBE", "BTM", "CH", "CEE", "CS", "ID", "BS", "EE", "MS", "ME", "NQE", "PH", "ISE"
     };
+    static final String des[] = {
+            "Aerospace Engineering", "Bio and Brain Engineering", "Business Technology Management", "Chemistry",
+            "Civil and Environmental Engineering", "Computer Science", "Industrial Design", "Biological Sciences", "Electrical Engineering",
+            "Mathematical Sciences", "Mechanical Engineering", "Nuclear and Quantum Engineering", "Physics", "Industrial and Systems Engineering"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

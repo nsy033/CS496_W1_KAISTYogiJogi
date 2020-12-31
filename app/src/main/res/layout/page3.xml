@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal" >
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Page3Fragment">
 
-    <GridView
-        android:id="@+id/gridView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnWidth="100dp"
-        android:horizontalSpacing="5dp"
-        android:verticalSpacing="10dp"
-        android:numColumns="4"
-        android:gravity="center"
-        android:layout_margin="10dp"
-        android:paddingTop="50dp">
-    </GridView>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
 
-</LinearLayout>
+        <GridView
+            android:id="@+id/gridView_third_tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnWidth="100dp"
+            android:layout_gravity = "center_horizontal"
+            android:paddingTop="45dp"
+            android:numColumns="4" >
+        </GridView>
+
+    </LinearLayout>
+
+</FrameLayout>
