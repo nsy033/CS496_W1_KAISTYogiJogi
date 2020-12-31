@@ -145,5 +145,3 @@ public class GridAdapter extends BaseAdapter {
     }
 
 }
-
-

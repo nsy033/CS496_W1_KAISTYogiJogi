@@ -1,6 +1,7 @@
 package com.example.helloworld;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -107,8 +108,8 @@ public class Page2Fragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             ImageView imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
-            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageView.setLayoutParams(new GridView.LayoutParams(250, 250));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(5, 5, 5, 5);
             imageView.setImageResource(img[position]);
             final int pos = position;

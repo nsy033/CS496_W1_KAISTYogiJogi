@@ -54,6 +54,28 @@ public class MainActivity extends AppCompatActivity {
             "Mathematical Sciences", "Mechanical Engineering", "Nuclear and Quantum Engineering", "Physics", "Industrial and Systems Engineering"
     };
 
+    static final String pos[] = {
+            "AE", "BBE", "BTM", "CH", "CEE", "CS", "ID", "BS", "EE", "MS", "ME", "NQE", "PH", "ISE"
+    };
+    static final String tel[] = {
+            "+82-42-350-4502", "+82-42-350-4502","+82-42-350-4502","+82-42-350-4502",
+            "+82-42-350-4502","+82-42-350-4502","+82-42-350-4502","+82-42-350-4502",
+            "+82-42-350-4502","+82-42-350-4502","+82-42-350-4502","+82-42-350-4502",
+            "+82-42-350-4502","+82-42-350-4502"
+    };
+    static final String fax[] = {
+            "+82-42-350-4510", "+82-42-350-4510","+82-42-350-4510","+82-42-350-4510",
+            "+82-42-350-4510","+82-42-350-4510","+82-42-350-4510","+82-42-350-4510",
+            "+82-42-350-4510","+82-42-350-4510","+82-42-350-4510","+82-42-350-4510",
+            "+82-42-350-4510","+82-42-350-4510"
+    };
+    static final int resId[] = {
+            R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
+            R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8,
+            R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
+            R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
