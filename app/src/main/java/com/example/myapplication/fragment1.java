@@ -3,11 +3,11 @@ package com.example.myapplication;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import android.provider.ContactsContract;
@@ -23,12 +23,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -44,11 +42,8 @@ public class fragment1 extends Fragment {
 
     public ArrayList<Contact> contactList = new ArrayList<Contact>();
 
-    public fragment1() {
-        // Required empty public constructor
-    }
+    public fragment1() { }
 
-    // TODO: Rename and change types and number of parameters
     public static fragment1 newInstance() {
         fragment1 fragment = new fragment1();
         return fragment;
@@ -73,6 +68,8 @@ public class fragment1 extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                /**
+
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 Contact con = contactList.get(position);
                 dlg.setTitle("Name : " + con.getName() );
@@ -82,6 +79,10 @@ public class fragment1 extends Fragment {
                         con.getAddress());
                 dlg.setNegativeButton("Close", null);
                 dlg.show();
+                 */
+                Intent tt = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+contactList.get(position).getPhonenumber()));
+                //Intent tt = new Intent("android.intent.action.CALL", Uri.parse("tel:010"));
+                startActivity(tt);
             }
         });
 
@@ -91,7 +92,7 @@ public class fragment1 extends Fragment {
 
     public ListViewAdapter add_item_to_listviewadapter(ListViewAdapter myadapter){
         String json = "";
-        json = getJsonString();
+        json = getJsonString("contacts.json");
         jsonParsing(json); // arraylist 에 들어가게 됨.
         String str = "-";
         //LIST_MENU.add(str);
@@ -111,13 +112,12 @@ public class fragment1 extends Fragment {
         return myadapter;
     }
 
-    // first tab
-    private String getJsonString()
+    public String getJsonString(String filename)
     {
         String json = "";
 
         try {
-            InputStream is = getActivity().getAssets().open("contacts.json");
+            InputStream is = getActivity().getAssets().open(filename);
             int fileSize = is.available();
 
             byte[] buffer = new byte[fileSize];
@@ -134,7 +134,8 @@ public class fragment1 extends Fragment {
         return json;
     }
 
-    private void jsonParsing(String json)
+
+    public void jsonParsing(String json)
     {
         try{
             JSONObject jsonObject = new JSONObject(json);
@@ -156,5 +157,7 @@ public class fragment1 extends Fragment {
         }catch (JSONException e) {
             e.printStackTrace();
         }
+
     }
+
 }

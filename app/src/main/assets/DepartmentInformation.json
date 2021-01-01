@@ -1,0 +1,115 @@
+{ "DepartmentInformation" : [
+  {
+    "dep_building_num" : "N1",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N2",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N3",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N4",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N5",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N6",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N7",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N8",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N9",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N10",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N11",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N12",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N13",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N14",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N15",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  },
+  {
+    "dep_building_num" : "N16",
+    "dep_k_phone_number" : "010-kaist-phonenumber",
+    "dep_k_email" : "kaist@naver.com",
+    "dep_a_phone_number" : "010-admin-phonenumber",
+    "dep_a_email" : "kaist@admin.com"
+  }
+]
+}

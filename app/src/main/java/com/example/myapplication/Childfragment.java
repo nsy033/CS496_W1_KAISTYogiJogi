@@ -14,20 +14,24 @@ import androidx.fragment.app.Fragment;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class Childfragment extends Fragment {
 
     public int position;
     public int[] dep_icon;
     public String[] dep_name;
+    public ArrayList<ChildFragmentItem> departmentlist;
 
     public Childfragment() {
         // Required empty public constructor
     }
 
-    public Childfragment(int position, int[] dep_icon, String[] dep_name){
+    public Childfragment(int position, int[] dep_icon, String[] dep_name, ArrayList<ChildFragmentItem> departmentlist){
         this.position = position;
         this.dep_icon = dep_icon;
         this.dep_name = dep_name;
+        this.departmentlist = departmentlist;
     }
 
     public static Childfragment newInstance() {
@@ -39,24 +43,6 @@ public class Childfragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /**
-         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
-
-         View nowView = inflater.inflate(R.layout.childfragment,null);
-         ImageView mapImageView = (ImageView) nowView.findViewById(R.id.imageView_map);
-         TextView building_numTextView = (TextView) nowView.findViewById(R.id.building_num);
-         TextView king_phoneTextView = (TextView) nowView.findViewById(R.id.king_phone_number);
-         TextView king_emailTextView = (TextView) nowView.findViewById(R.id.king_email);
-         TextView admin_phoneTextView = (TextView) nowView.findViewById(R.id.admin_phone_number);
-         TextView admin_emailTextView = (TextView) nowView.findViewById(R.id.admin_email);
-
-         mapImageView.setImageResource(R.drawable.a1);
-         building_numTextView.setText("N1");
-         king_phoneTextView.setText("010-4423-1123");
-         king_emailTextView.setText("gsg@naver.com");
-         admin_phoneTextView.setText("010-4425-5677");
-         admin_emailTextView.setText("11ag@naver.com");
-        */
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,18 +57,23 @@ public class Childfragment extends Fragment {
         TextView tv_admin_phone_number = (TextView) view.findViewById(R.id.admin_phone_number);
         TextView tv_admin_email = (TextView) view.findViewById(R.id.admin_email);
 
-        String dep_num = "N11";
-        String king_phone_number = "010-4245-2323";
-        String king_email = "gugu@kaist.ac.kr";
-        String admin_phone_number = "010-1344-2353";
-        String admin_email = "khiw@kasit.ac.kr";
 
         iv_map.setImageResource(dep_icon[position]);
-        tv_building_num.setText(dep_num + dep_name[position]);
-        tv_king_phone_number.setText(king_phone_number);
-        tv_king_email.setText(king_email);
-        tv_admin_phone_number.setText(admin_phone_number);
-        tv_admin_email.setText(admin_email);
+        tv_building_num.setText(departmentlist.get(position).getDep_num() + " | " +dep_name[position]);
+        tv_king_phone_number.setText(departmentlist.get(position).getDep_king_phone());
+        tv_king_email.setText(departmentlist.get(position).getDep_king_email());
+        tv_admin_phone_number.setText(departmentlist.get(position).getDep_admin_phone());
+        tv_admin_email.setText(departmentlist.get(position).getDep_admin_email());
+
+        /**
+        int what = departmentlist.size();
+        iv_map.setImageResource(dep_icon[position]);
+        tv_building_num.setText("112||" + what);
+        tv_king_phone_number.setText("12");
+        tv_king_email.setText("12");
+        tv_admin_phone_number.setText("12");
+        tv_admin_email.setText("12");
+         */
         /**
         ChildfragmentAdapter adapter = new ChildfragmentAdapter();
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU)

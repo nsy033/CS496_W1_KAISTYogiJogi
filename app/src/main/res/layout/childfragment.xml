@@ -12,12 +12,13 @@
         android:background="#FFFFFF"
         android:orientation="vertical"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:paddingRight="16dp"
+        android:paddingTop="47dp">
 
         <ImageView
            android:id="@+id/imageView_map"
             android:layout_width="match_parent"
-            android:layout_height="50dp"></ImageView>
+            android:layout_height="200dp"></ImageView>
 
         <TextView
             android:id="@+id/building_num"

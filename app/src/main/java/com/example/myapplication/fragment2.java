@@ -1,9 +1,6 @@
 package com.example.myapplication;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,10 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +88,7 @@ public class fragment2 extends Fragment {
             pagerArr.add(new PagerModel(""+(i+1), "Pager Item #" + i, img[i]));
         }
 
-        TestPagerAdapter adapter = new TestPagerAdapter(getContext(), pagerArr);
+        GalleryPagerAdapter adapter = new GalleryPagerAdapter(getContext(), pagerArr);
         ViewPager pager = (ViewPager) dialog.findViewById(R.id.pager);
         pager.setAdapter(adapter);
         pager.setPageTransformer(true, new ZoomOutPageTransformer());
