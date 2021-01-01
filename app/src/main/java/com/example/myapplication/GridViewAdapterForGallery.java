@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +46,18 @@ public class GridViewAdapterForGallery extends BaseAdapter {
 
         ImageView imageView = new ImageView(context);
         imageView.setLayoutParams(new GridView.LayoutParams(350,300));
+
+/**
+        Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), img[position]);
+        bmp = Bitmap.createScaledBitmap(bmp, 10, 10, false);
+        imageView.setAdjustViewBounds(true);
+        imageView.setImageBitmap(bmp);
+*/
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setPadding(5,5,5,5);
         imageView.setImageResource(img[position]);
+
+
         /**
         final int pos = position;
         imageView.setOnClickListener(new View.OnClickListener(){
