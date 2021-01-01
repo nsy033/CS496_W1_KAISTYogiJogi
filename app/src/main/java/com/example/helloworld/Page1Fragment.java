@@ -116,6 +116,4 @@ public class Page1Fragment extends Fragment {
 
         return view ;
     }
-
-
 }

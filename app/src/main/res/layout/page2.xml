@@ -9,9 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnWidth="50dp"
+        android:gravity="center_horizontal"
         android:numColumns="3"
-        android:paddingTop="50dp">
-    </GridView>
+        android:paddingTop="50dp"></GridView>
 
 </LinearLayout>
-

@@ -1,16 +1,20 @@
 package com.example.helloworld;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Point;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
@@ -80,6 +84,7 @@ public class Page2Fragment extends Fragment {
         return view;
     }
 
+
     public class MyGridAdapter extends BaseAdapter {
         Context context;
         int layout;
@@ -108,7 +113,17 @@ public class Page2Fragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             ImageView imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(250, 250));
+
+            Display display = getActivity().getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getRealSize(size); // or getSize(size)
+            int width = size.x;
+            int height = size.y;
+
+            width /= 3;
+            width -= 10;
+
+            imageView.setLayoutParams(new GridView.LayoutParams(width, width));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(5, 5, 5, 5);
             imageView.setImageResource(img[position]);
@@ -124,10 +139,11 @@ public class Page2Fragment extends Fragment {
                     //dlg.setTitle("Title");
                     dlg.setIcon(R.drawable.ic_launcher_foreground);
                     dlg.setView(dialogView);
-                    dlg.setNegativeButton("CLOSE", null);
+                    dlg.setPositiveButton("CLOSE", null);
                     dlg.show();
                 }
             });
+
             return imageView;
         }
     }

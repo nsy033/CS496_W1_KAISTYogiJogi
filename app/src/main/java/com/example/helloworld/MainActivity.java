@@ -2,12 +2,15 @@ package com.example.helloworld;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,7 +30,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-
 public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -43,37 +45,16 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.aerospace, R.drawable.brain, R.drawable.business, R.drawable.chemistry,
             R.drawable.civil, R.drawable.computer, R.drawable.design, R.drawable.dna,
             R.drawable.electrical, R.drawable.math, R.drawable.mechanic, R.drawable.nuclear,
-            R.drawable.physics, R.drawable.system
+            R.drawable.physics, R.drawable.system, R.drawable.biochem, R.drawable.material
     };
     static final String name[] = {
-            "AE", "BBE", "BTM", "CH", "CEE", "CS", "ID", "BS", "EE", "MS", "ME", "NQE", "PH", "ISE"
+            "AE", "BBE", "BTM", "CH", "CEE", "CS", "ID", "BS", "EE", "MS", "ME", "NQE", "PH", "ISE", "CBE", "MSE"
     };
     static final String des[] = {
             "Aerospace Engineering", "Bio and Brain Engineering", "Business Technology Management", "Chemistry",
             "Civil and Environmental Engineering", "Computer Science", "Industrial Design", "Biological Sciences", "Electrical Engineering",
-            "Mathematical Sciences", "Mechanical Engineering", "Nuclear and Quantum Engineering", "Physics", "Industrial and Systems Engineering"
-    };
-
-    static final String pos[] = {
-            "AE", "BBE", "BTM", "CH", "CEE", "CS", "ID", "BS", "EE", "MS", "ME", "NQE", "PH", "ISE"
-    };
-    static final String tel[] = {
-            "+82-42-350-4502", "+82-42-350-4502","+82-42-350-4502","+82-42-350-4502",
-            "+82-42-350-4502","+82-42-350-4502","+82-42-350-4502","+82-42-350-4502",
-            "+82-42-350-4502","+82-42-350-4502","+82-42-350-4502","+82-42-350-4502",
-            "+82-42-350-4502","+82-42-350-4502"
-    };
-    static final String fax[] = {
-            "+82-42-350-4510", "+82-42-350-4510","+82-42-350-4510","+82-42-350-4510",
-            "+82-42-350-4510","+82-42-350-4510","+82-42-350-4510","+82-42-350-4510",
-            "+82-42-350-4510","+82-42-350-4510","+82-42-350-4510","+82-42-350-4510",
-            "+82-42-350-4510","+82-42-350-4510"
-    };
-    static final int resId[] = {
-            R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
-            R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8,
-            R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
-            R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8
+            "Mathematical Sciences", "Mechanical Engineering", "Nuclear and Quantum Engineering", "Physics", "Industrial and Systems Engineering",
+            "Chemical and Biomolecular Engineering", "Materials Sciences and Engineering"
     };
 
     @Override
@@ -138,4 +119,5 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 }
