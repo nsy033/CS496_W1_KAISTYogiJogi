@@ -41,9 +41,9 @@ public class fragment2 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragment2, null) ;
 
         //데이터
-        int img[] = { R.drawable.butterfly,R.drawable.drop,R.drawable.italy,R.drawable.owl,R.drawable.springbird,R.drawable.tiger,
-                R.drawable.cat,R.drawable.horses,R.drawable.iceland,R.drawable.puppy,R.drawable.rabbit,
-                R.drawable.a1,R.drawable.a2,R.drawable.a3,R.drawable.a4,R.drawable.a5,R.drawable.a6,R.drawable.a7,R.drawable.a8,R.drawable.a9,R.drawable.a10,R.drawable.a11,};
+        int img[] = {   R.drawable.g1,R.drawable.g2,R.drawable.g3,R.drawable.g4,R.drawable.g5,R.drawable.g6, R.drawable.g7,
+                        R.drawable.g8,R.drawable.g9,R.drawable.g10,R.drawable.g11,R.drawable.g12,R.drawable.g13,R.drawable.g14,
+                        R.drawable.g15,R.drawable.g16,R.drawable.g17,R.drawable.g18,R.drawable.g19,R.drawable.g20,R.drawable.g21,R.drawable.g22};
 
         // 커스텀 아답타 생성
         GridViewAdapterForGallery adapter = new GridViewAdapterForGallery (

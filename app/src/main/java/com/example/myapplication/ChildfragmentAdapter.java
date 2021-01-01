@@ -73,6 +73,7 @@ public class ChildfragmentAdapter extends BaseAdapter {
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
     public void addItem(Drawable dep_map, String dep_num, String dep_king_phone,String dep_king_email ,String dep_admin_phone,String dep_admin_email) {
+
         ChildFragmentItem item = new ChildFragmentItem();
 
         item.setDep_map(dep_map);

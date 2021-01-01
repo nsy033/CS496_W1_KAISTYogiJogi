@@ -14,14 +14,16 @@ public class Childfragment extends Fragment {
 
     public int position;
     public int[] dep_icon;
+    public String[] dep_name;
 
     public Childfragment() {
         // Required empty public constructor
     }
 
-    public Childfragment(int position, int[] dep_icon){
+    public Childfragment(int position, int[] dep_icon, String[] dep_name){
         this.position = position;
         this.dep_icon = dep_icon;
+        this.dep_name = dep_name;
     }
 
     public static Childfragment newInstance() {
@@ -58,7 +60,7 @@ public class Childfragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.childfragment, null) ;
         ChildfragmentAdapter adapter = new ChildfragmentAdapter();
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU)
+//      ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU)
         ListView listview = (ListView) view.findViewById(R.id.listview_forchildfragment);
         listview.setAdapter(adapter);
 
@@ -75,7 +77,7 @@ public class Childfragment extends Fragment {
         String admin_phone_number = "010-1344-2353";
         String admin_email = "khiw@kasit.ac.kr";
 
-        myadapter.addItem(ContextCompat.getDrawable(getActivity(), dep_icon[position]), dep_num, king_phone_number,king_email,admin_phone_number,admin_email);
+        myadapter.addItem(ContextCompat.getDrawable(getActivity(), dep_icon[position]), dep_name[position] + dep_num, king_phone_number,king_email,admin_phone_number,admin_email);
         return myadapter;
     }
 }

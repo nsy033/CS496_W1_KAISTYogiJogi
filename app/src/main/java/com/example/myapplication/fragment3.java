@@ -61,7 +61,7 @@ public class fragment3 extends Fragment {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                Fragment newFragment = new Childfragment(position, dep_icon);
+                Fragment newFragment = new Childfragment(position, dep_icon, dep_name);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.parent_id, newFragment);
                 transaction.addToBackStack(null);

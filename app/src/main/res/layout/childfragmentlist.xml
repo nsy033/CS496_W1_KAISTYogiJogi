@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/imageView_map"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="50dp"
     ></ImageView>
 
     <TextView
@@ -19,7 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="New Text"
-        android:textColor="#1B1B1B"></TextView>
+        android:textColor="#1B1B1B"
+        ></TextView>
 
     <TextView
         android:id="@+id/king_phone_number"
@@ -48,6 +49,8 @@
         android:layout_height="50dp"
         android:text="New Text"
         android:textColor="#1B1B1B"></TextView>
+
+
 
 
 </LinearLayout>
