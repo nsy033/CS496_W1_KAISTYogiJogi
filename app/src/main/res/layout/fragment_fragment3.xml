@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment3">
+    android:background="#FFFFFF"
+    tools:context=".fragment3"
+    >
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical" >
-        <TextView
-            android:id="@+id/textView_plus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="GridView 활용"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-
-        <GridView
-            android:id="@+id/gridView_third_tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnWidth="100dp"
-            android:horizontalSpacing="10dp"
-            android:verticalSpacing="10dp"
-            android:numColumns="auto_fit" >
-        </GridView>
-
+    <LinearLayout
+        android:id="@+id/child_fragment"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     </LinearLayout>
+
+
+    <GridView
+        android:id="@+id/gridView_third_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnWidth="100dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:paddingTop="50dp"
+        android:verticalSpacing="10dp">
+    </GridView>
+
+
 
 </FrameLayout>

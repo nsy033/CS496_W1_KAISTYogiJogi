@@ -2,7 +2,7 @@ package com.example.myapplication;
 
 import android.graphics.drawable.Drawable;
 
-public class GridViewItem {
+public class GridViewItemKaist {
     private Drawable dep_iconDrawable ; //학과아이콘
     private String dep_str ; // 학과이름
 
