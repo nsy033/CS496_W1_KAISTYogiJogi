@@ -1,5 +1,6 @@
 package com.example.helloworld;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Point;
@@ -8,15 +9,20 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.helloworld.MainActivity.img;
 
@@ -132,19 +138,41 @@ public class Page2Fragment extends Fragment {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    View dialogView = (View) View.inflate(getActivity(), R.layout.dialog, null);
-                    AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
-                    ImageView ivPoster = (ImageView) dialogView.findViewById(R.id.ivPoster);
-                    ivPoster.setImageResource(img[pos]);
+                    //View dialogView = (View) View.inflate(getActivity(), R.layout.dialog, null);
+                    //AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+                    //ImageView ivPoster = (ImageView) dialogView.findViewById(R.id.ivPoster);
+                    //ivPoster.setImageResource(img[pos]);
                     //dlg.setTitle("Title");
-                    dlg.setIcon(R.drawable.ic_launcher_foreground);
-                    dlg.setView(dialogView);
-                    dlg.setPositiveButton("CLOSE", null);
-                    dlg.show();
+                    //dlg.setIcon(R.drawable.ic_launcher_foreground);
+                    //dlg.setView(dialogView);
+                    //dlg.setPositiveButton("CLOSE", null);
+                    //dlg.show();
+                    showDialog(pos, view);
                 }
             });
 
             return imageView;
         }
+
+    }
+
+    public void showDialog(int position, View v){
+        Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.pager_layout);
+
+        List<PagerModel> pagerArr = new ArrayList<>();
+
+        for(int i=0;i<img.length; i++){
+            pagerArr.add(new PagerModel(""+(i+1), "Pager Item #" + i, img[i]));
+        }
+
+        TestPagerAdapter adapter = new TestPagerAdapter(getContext(), pagerArr);
+        ViewPager pager = (ViewPager) dialog.findViewById(R.id.pager);
+        pager.setAdapter(adapter);
+        pager.setCurrentItem(position);
+
+        dialog.show();
+
     }
 }
