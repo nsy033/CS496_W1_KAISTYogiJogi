@@ -3,10 +3,12 @@ package com.example.myapplication;
 import java.io.Serializable;
 
 public class ContactItem implements Serializable {
-    public String user_phNumber;
-    public String user_Name;
+    public String user_phNumber = "010-defa-ult.";
+    public String user_Name = "defaultName";
+    public String user_Email ="default@email.com";
     public long photo_id=0, person_id=0;
-    private int id;
+
+    private int id= 0;
 
     public ContactItem(){}
     public long getPhoto_id(){
@@ -27,6 +29,13 @@ public class ContactItem implements Serializable {
     public String getUser_Name(){
         return user_Name;
     }
+    public String getUser_Email(){
+        return user_Email;
+    }
+    public void setUser_Email(String string){
+        this.user_Email = string;
+    }
+
     public void setId(int id){
         this.id = id;
     }
@@ -41,6 +50,7 @@ public class ContactItem implements Serializable {
     public String toString(){
         return this.user_phNumber;
     }
+
     @Override
     public int hashCode(){
         return getPhNumberChanged().hashCode();

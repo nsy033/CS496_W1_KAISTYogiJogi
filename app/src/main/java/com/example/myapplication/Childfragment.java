@@ -7,22 +7,33 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
 import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+import java.util.Map;
 
-public class Childfragment extends Fragment {
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+
+public class Childfragment extends Fragment implements OnMapReadyCallback {
 
     public int position;
     public int[] dep_icon;
     public String[] dep_name;
     public ArrayList<ChildFragmentItem> departmentlist;
-
+    public GoogleMap mMap;
+    public MapView mapView;
     public Childfragment() {
         // Required empty public constructor
     }
@@ -57,7 +68,7 @@ public class Childfragment extends Fragment {
         TextView tv_admin_phone_number = (TextView) view.findViewById(R.id.admin_phone_number);
         TextView tv_admin_email = (TextView) view.findViewById(R.id.admin_email);
 
-
+        //setting information of department
         iv_map.setImageResource(dep_icon[position]);
         tv_building_num.setText(departmentlist.get(position).getDep_num() + " | " +dep_name[position]);
         tv_king_phone_number.setText(departmentlist.get(position).getDep_king_phone());
@@ -65,6 +76,12 @@ public class Childfragment extends Fragment {
         tv_admin_phone_number.setText(departmentlist.get(position).getDep_admin_phone());
         tv_admin_email.setText(departmentlist.get(position).getDep_admin_email());
 
+
+        //to use google maps
+        mapView = (MapView) view.findViewById(R.id.map);
+        mapView.getMapAsync(this);
+        //SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
+        //mapFragment.getMapAsync(this);
         /**
         int what = departmentlist.size();
         iv_map.setImageResource(dep_icon[position]);
@@ -84,13 +101,70 @@ public class Childfragment extends Fragment {
         return view;
     }
 
-    /**
-    public ChildfragmentAdapter add_item_to_CFadapter(ChildfragmentAdapter myadapter, int position){
+    @Override
+    public void onMapReady(final GoogleMap googleMap) {
 
+        mMap = googleMap;
 
+        LatLng IT_BUILDING = new LatLng(36.37425, 127.36563);
+        LatLng KAIST = new LatLng(36.37246, 127.36040);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(IT_BUILDING);
+        markerOptions.title("KAIST");
+        markerOptions.snippet("김병호김삼열 IT융합 빌딩(N1)");
+        mMap.addMarker(markerOptions);
 
-        myadapter.addItem(ContextCompat.getDrawable(getActivity(), dep_icon[position]), dep_name[position] + dep_num, king_phone_number,king_email,admin_phone_number,admin_email);
-        return myadapter;
+        // 기존에 사용하던 다음 2줄은 문제가 있습니다.
+
+        // CameraUpdateFactory.zoomTo가 오동작하네요.
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(KAIST, 14));
+
     }
-    */
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onLowMemory();
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+//액티비티가 처음 생성될 때 실행되는 함수
+        if(mapView != null)
+        {
+            mapView.onCreate(savedInstanceState);
+        }
+    }
+
 }

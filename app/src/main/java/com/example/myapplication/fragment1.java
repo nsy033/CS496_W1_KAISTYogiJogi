@@ -40,7 +40,7 @@ import java.util.LinkedHashSet;
  */
 public class fragment1 extends Fragment {
 
-    public ArrayList<Contact> contactList = new ArrayList<Contact>();
+    public ArrayList<ContactItem> contactList = new ArrayList<ContactItem>();
 
     public fragment1() { }
 
@@ -63,6 +63,8 @@ public class fragment1 extends Fragment {
         ListView listview = (ListView) view.findViewById(R.id.listview1);
         listview.setAdapter(adapter);
 
+        getContactList();   //핸드폰에서 불러오기.
+        
         adapter = add_item_to_listviewadapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,7 +82,7 @@ public class fragment1 extends Fragment {
                 dlg.setNegativeButton("Close", null);
                 dlg.show();
                  */
-                Intent tt = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+contactList.get(position).getPhonenumber()));
+                Intent tt = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+contactList.get(position).getUser_phNumber()));
                 //Intent tt = new Intent("android.intent.action.CALL", Uri.parse("tel:010"));
                 startActivity(tt);
             }
@@ -90,19 +92,54 @@ public class fragment1 extends Fragment {
     }
 
 
+    public void getContactList(){
+        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+        String[] projection = {
+                ContactsContract.CommonDataKinds.Phone.NUMBER,
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+        };
+
+        String[] selectionArgs = null;
+        //ContentResolver ccc = getContentResolver();
+
+        String sortOrder = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
+        Cursor cursor = getContext().getContentResolver().query(uri,projection,null,selectionArgs,sortOrder);
+        //Cursor cursor = getActivity().getContentResolver().query(uri,projection,null,null,null);
+
+        //LinkedHashSet<Contact> hashlist = new LinkedHashSet<>();
+        if (cursor.moveToFirst()){
+            do {
+                ContactItem newcontact = new ContactItem();
+
+                String user_name = cursor.getString(1);
+                newcontact.setUser_Name(user_name);
+                String phone_number = cursor.getString(0);
+                //String phone_number = "010-1333-4456";
+                newcontact.setUser_phNumber(phone_number);
+                String address = "test@kaist.ac.kr";
+                newcontact.setUser_Email(address);
+                contactList.add(newcontact);
+
+            }while(cursor.moveToNext());
+        }
+
+    }
+
     public ListViewAdapter add_item_to_listviewadapter(ListViewAdapter myadapter){
+        /** to use Json contacts
         String json = "";
         json = getJsonString("contacts.json");
         jsonParsing(json); // arraylist 에 들어가게 됨.
-        String str = "-";
+        */
+         String str = "-";
         //LIST_MENU.add(str);
 
         for(int i = 0; i< contactList.size() ; i++){
-            Contact mv = contactList.get(i);
+            ContactItem mv = contactList.get(i);
             str = "";
-            str = str + mv.getName();
+            str = str + mv.getUser_Name();
             String str2 = "";
-            str2 = str2 + mv.getPhonenumber();
+            str2 = str2 + mv.getUser_phNumber();
 
             myadapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.person), str, str2);
 
@@ -146,11 +183,11 @@ public class fragment1 extends Fragment {
             {
                 JSONObject contentObject = contentArray.getJSONObject(i);
 
-                Contact contact = new Contact();
+                ContactItem contact = new ContactItem();
 
-                contact.setName(contentObject.getString("name"));
-                contact.setPhonenumber(contentObject.getString("phonenumber"));
-                contact.setAddress(contentObject.getString("address"));
+                contact.setUser_Name(contentObject.getString("name"));
+                contact.setUser_phNumber(contentObject.getString("phonenumber"));
+                contact.setUser_Email(contentObject.getString("address"));
 
                 contactList.add(contact);
             }

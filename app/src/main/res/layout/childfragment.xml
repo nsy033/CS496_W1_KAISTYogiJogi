@@ -13,12 +13,19 @@
         android:orientation="vertical"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="47dp">
+        android:paddingTop="60dp">
+
+        <com.google.android.gms.maps.MapView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
 
         <ImageView
            android:id="@+id/imageView_map"
             android:layout_width="match_parent"
-            android:layout_height="200dp"></ImageView>
+            android:layout_height="50dp"></ImageView>
 
         <TextView
             android:id="@+id/building_num"
