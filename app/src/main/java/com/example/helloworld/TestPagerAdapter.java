@@ -36,14 +36,14 @@ public class TestPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position){
         View view = inflater.inflate(R.layout.pager_list_item, container, false);
-        //TextView tv = (TextView) view.findViewById(R.id.textview);
+        TextView tv = (TextView) view.findViewById(R.id.textview);
         ImageView iv = (ImageView) view.findViewById(R.id.imageview);
-        view.setTag(position);
+        //view.setTag(position);
 
         ((ViewPager) container).addView(view);
         PagerModel model = pagerArr.get(position);
         iv.setImageResource(img[position]);
-        //tv.setText(model.getTitle());
+        tv.setText(""+(position+1) + " / " + getCount());
         return view;
     }
 

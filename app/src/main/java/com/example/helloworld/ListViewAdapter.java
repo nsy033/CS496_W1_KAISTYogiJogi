@@ -1,19 +1,27 @@
 package com.example.helloworld;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.example.helloworld.MainActivity.contactItems;
+//import static com.example.helloworld.MainActivity.contactList;
+
 public class ListViewAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
-    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
+    public static ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
 
     // ListViewAdapter의 생성자
     public ListViewAdapter() {
@@ -42,6 +50,46 @@ public class ListViewAdapter extends BaseAdapter {
         ImageView iconImageView = (ImageView) convertView.findViewById(R.id.imageView1) ;
         TextView titleTextView = (TextView) convertView.findViewById(R.id.textView1) ;
         TextView descTextView = (TextView) convertView.findViewById(R.id.textView2) ;
+        ImageButton btn = (ImageButton) convertView.findViewById(R.id.button);
+        btn.setScaleType(ImageButton.ScaleType.FIT_CENTER);
+
+        btn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                ContactItem con = contactItems.get(position);
+                Intent tt = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+con.getUser_phNumber()));
+                context.startActivity(tt);
+            }
+        });
+        btn.setOnLongClickListener(new View.OnLongClickListener(){
+            public boolean onLongClick(View view) {
+                ContactItem con = contactItems.get(position);
+                Intent tt = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+con.getUser_phNumber()));
+                context.startActivity(tt);
+                return true;
+            }
+        });
+
+        convertView.setOnClickListener(new AdapterView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ContactItem con = contactItems.get(position);
+
+                AlertDialog.Builder adb = new AlertDialog.Builder(context);
+                //int id = (int) parent.getItemIdAtPosition(position);
+                adb.setTitle("Name: " + con.getUser_name());
+                adb.setMessage("PhoneNumber: "
+                        + con.getUser_phNumber()
+                        + "\nEmail: "
+                        + con.getMail()
+                        + "\nAddress: "
+                        + con.getAddress()
+                );
+                adb.setPositiveButton("Ok", null);
+                adb.show();
+
+            }
+        });
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         ListViewItem listViewItem = listViewItemList.get(position);
@@ -75,5 +123,9 @@ public class ListViewAdapter extends BaseAdapter {
         item.setDesc(desc);
 
         listViewItemList.add(item);
+    }
+
+    public void clearItem() {
+        listViewItemList = new ArrayList<ListViewItem>();
     }
 }

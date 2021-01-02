@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.helloworld.MainActivity"
-    tools:showIn="@layout/activity_main">
-
+    android:orientation="vertical">
     <ListView
-        android:paddingTop="45dp"
         android:id="@+id/listview1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingTop="45dp">
 
-</RelativeLayout>
+    </ListView>
+
+    <ImageButton
+        android:id="@+id/button2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="35dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/add"/>
+
+    <ImageButton
+        android:id="@+id/button3"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="105dp"
+        android:layout_marginBottom="35dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/search" />
+
+</FrameLayout>
