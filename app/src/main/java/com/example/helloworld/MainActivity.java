@@ -10,11 +10,13 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.OperationApplicationException;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.telephony.TelephonyManager;
@@ -38,8 +40,10 @@ import java.util.LinkedHashSet;
 import android.provider.ContactsContract;
 
 import static java.security.AccessController.getContext;
+import static com.example.helloworld.Page1Fragment.newcontact;
 
 public class MainActivity extends AppCompatActivity {
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
@@ -78,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
         Uri uri1 = ContactsContract.CommonDataKinds.Email.CONTENT_URI;
         Uri uri2 = ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_URI;
+        boolean flag_cursor1 = true;
+        boolean flag_cursor2 = true;
 
         Cursor cursor = null;
         Cursor cursor1= null;
@@ -136,12 +142,34 @@ public class MainActivity extends AppCompatActivity {
                 contactItem.setPhoto_id(cursor.getString(
                         cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_ID)
                 ));
-                contactItem.setMail(cursor1.getString(
-                        cursor1.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)
-                ));
-                contactItem.setAddress(cursor2.getString(
-                        cursor2.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.DATA)
-                ));
+
+                if(cursor1.moveToNext() && flag_cursor1){
+                    cursor1.moveToPrevious();
+                    contactItem.setMail(cursor1.getString(
+                            cursor1.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)
+                    ));
+                }
+                else if(flag_cursor1){
+                    cursor1.moveToPrevious();
+                    contactItem.setMail(cursor1.getString(
+                            cursor1.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)
+                    ));
+                    flag_cursor1 = false;
+                }
+
+                if(cursor2.moveToNext() && flag_cursor2){
+                    cursor2.moveToPrevious();
+                    contactItem.setAddress(cursor2.getString(
+                            cursor2.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.DATA)
+                    ));
+                }
+                else if(flag_cursor2){
+                    cursor2.moveToPrevious();
+                    contactItem.setAddress(cursor2.getString(
+                            cursor2.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.DATA)
+                    ));
+                    flag_cursor2 = false;
+                }
 
                 /*
                 contactItem.setPerson_id(cursor.getString(
@@ -156,7 +184,6 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
         return contactItems;
     }
-
 /*
     private String getJsonString()
     {

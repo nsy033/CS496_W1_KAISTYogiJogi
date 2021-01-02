@@ -1,23 +1,38 @@
 package com.example.helloworld;
 
 import android.app.AlertDialog;
+import android.content.ContentProviderOperation;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.OperationApplicationException;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.RemoteException;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
 import static com.example.helloworld.MainActivity.contactItems;
 //import static com.example.helloworld.MainActivity.contactList;
+import static com.example.helloworld.Page1Fragment.adapter;
+import static com.example.helloworld.Page1Fragment.listview;
+import static com.example.helloworld.Page1Fragment.newcontact;
 
 public class ListViewAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
@@ -50,44 +65,204 @@ public class ListViewAdapter extends BaseAdapter {
         ImageView iconImageView = (ImageView) convertView.findViewById(R.id.imageView1) ;
         TextView titleTextView = (TextView) convertView.findViewById(R.id.textView1) ;
         TextView descTextView = (TextView) convertView.findViewById(R.id.textView2) ;
+/*
         ImageButton btn = (ImageButton) convertView.findViewById(R.id.button);
         btn.setScaleType(ImageButton.ScaleType.FIT_CENTER);
 
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                ContactItem con = contactItems.get(position);
-                Intent tt = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+con.getUser_phNumber()));
+                ListViewItem con = listViewItemList.get(position);
+                Intent tt = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+con.getTitle()));
                 context.startActivity(tt);
             }
         });
         btn.setOnLongClickListener(new View.OnLongClickListener(){
             public boolean onLongClick(View view) {
-                ContactItem con = contactItems.get(position);
-                Intent tt = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+con.getUser_phNumber()));
+                ListViewItem con = listViewItemList.get(position);
+                Intent tt = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+con.getDesc()));
                 context.startActivity(tt);
                 return true;
             }
         });
+*/
 
         convertView.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                ContactItem con = contactItems.get(position);
-
+                ListViewItem con = listViewItemList.get(position);
                 AlertDialog.Builder adb = new AlertDialog.Builder(context);
-                //int id = (int) parent.getItemIdAtPosition(position);
-                adb.setTitle("Name: " + con.getUser_name());
-                adb.setMessage("PhoneNumber: "
-                        + con.getUser_phNumber()
-                        + "\nEmail: "
-                        + con.getMail()
-                        + "\nAddress: "
-                        + con.getAddress()
-                );
-                adb.setPositiveButton("Ok", null);
-                adb.show();
+                AlertDialog dialog = adb.create();
+                adb.setTitle(con.getTitle())
+                        .setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setPositiveButton("DIAL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dial(context, position);
+                            }
+                        })
+                        .setNegativeButton("CALL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                call(context, position);
+                            }
+                        })
+                        .show();
+            }
+        });
 
+        convertView.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View view) {
+                ListViewItem con = listViewItemList.get(position);
+
+                final LinearLayout linear = (LinearLayout) View.inflate(context, R.layout.contactdialog, null);
+                AlertDialog.Builder adb = new AlertDialog.Builder(context);
+                AlertDialog dialog = adb.create();
+
+                EditText edt = linear.findViewById(R.id.et1);
+                adb.setView(linear);
+                edt.setText(con.getTitle());
+
+                EditText edt2 = linear.findViewById(R.id.et2);
+                adb.setView(linear);
+                edt2.setText(con.getDesc());
+
+                EditText edt3 = linear.findViewById(R.id.et3);
+                adb.setView(linear);
+                edt3.setText(con.getMail());
+
+                EditText edt4 = linear.findViewById(R.id.et4);
+                adb.setView(linear);
+                edt4.setText(con.getAddress());
+
+                adb.setTitle("Edit Contact")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                String name = edt.getText().toString();
+                                String number = edt2.getText().toString();
+                                String mail = edt3.getText().toString();
+                                String add = edt4.getText().toString();
+
+                                ListViewItem tmp = new ListViewItem();
+                                tmp.setIcon(ContextCompat.getDrawable(context, R.drawable.user));
+                                tmp.setTitle(name);
+                                tmp.setDesc(number);
+                                tmp.setMail(mail);
+                                tmp.setAddress(add);
+                                listViewItemList.set(position, tmp);
+
+                                ContactItem temp = new ContactItem();
+                                temp.setUser_name(name);
+                                temp.setUser_phNumber(number);
+                                temp.setMail(mail);
+                                temp.setAddress(add);
+                                contactItems.set(position, temp);
+
+                                adapter.notifyDataSetChanged();
+                                listview.setAdapter(adapter);
+
+                                ContentResolver cr = context.getContentResolver();
+                                deleteContact(cr, con.getDesc());
+
+                                ContactItem contactItem = new ContactItem();
+                                contactItem.setUser_name(name);
+                                contactItem.setUser_phNumber(number);
+                                contactItem.setMail(mail);
+                                contactItem.setAddress(add);
+
+                                newcontact = new ArrayList<>();
+                                ContentProviderOperation.Builder op =
+                                        ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+                                                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
+                                                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null);
+                                newcontact.add(op.build());
+
+                                op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                                        .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+                                        .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, contactItem.getUser_name());
+                                newcontact.add(op.build());
+
+                                op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                                        .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+                                        .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, contactItem.getUser_phNumber())
+                                        .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, "TYPE_MOBILE");
+                                newcontact.add(op.build());
+
+                                op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                                        .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+                                        .withValue(ContactsContract.CommonDataKinds.Email.ADDRESS, contactItem.getMail())
+                                        .withValue(ContactsContract.CommonDataKinds.Email.TYPE, "TYPE_WORK");
+                                newcontact.add(op.build());
+
+                                op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                                        .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+                                        .withValue(ContactsContract.CommonDataKinds.StructuredPostal.CITY, con.getAddress())
+                                        .withValue(ContactsContract.CommonDataKinds.StructuredPostal.TYPE, "TYPE_HOME");
+
+                                op.withYieldAllowed(true);
+                                newcontact.add(op.build());
+
+                                try {
+                                    context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, newcontact);
+                                } catch (OperationApplicationException e) {
+                                    e.printStackTrace();
+                                } catch (RemoteException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        })
+                        .setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int index = 0;
+                                for (int i = 0; i < contactItems.size(); i++) {
+                                    ContactItem tmp = contactItems.get(i);
+                                    String tmp_name = tmp.getUser_name();
+
+                                    if (tmp_name.equals(con.getTitle())) {
+                                        index = i;
+                                        break;
+                                    }
+                                }
+                                contactItems.remove(index);
+
+                                for (int i = 0; i < listViewItemList.size(); i++) {
+                                    ListViewItem tmp = listViewItemList.get(i);
+                                    String tmp_name = tmp.getTitle();
+
+                                    if (tmp_name.equals(con.getTitle())) {
+                                        index = i;
+                                        break;
+                                    }
+                                }
+                                listViewItemList.remove(index);
+
+                                adapter.notifyDataSetChanged();
+                                listview.setAdapter(adapter);
+
+                                ContentResolver cr = context.getContentResolver();
+                                deleteContact(cr, con.getDesc());
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                adb.show();
+                return true;
             }
         });
 
@@ -115,17 +290,69 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(Drawable icon, String title, String desc) {
+    public void addItem(Drawable icon, String title, String desc, String mail, String address) {
         ListViewItem item = new ListViewItem();
 
         item.setIcon(icon);
         item.setTitle(title);
         item.setDesc(desc);
+        item.setMail(mail);
+        item.setAddress(address);
 
         listViewItemList.add(item);
     }
 
     public void clearItem() {
         listViewItemList = new ArrayList<ListViewItem>();
+    }
+
+
+    public void dial(Context context, int position) {
+        ListViewItem con = listViewItemList.get(position);
+        Intent tt = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+con.getDesc()));
+        context.startActivity(tt);
+    }
+
+    public void call(Context context, int position) {
+        ListViewItem con = listViewItemList.get(position);
+        Intent tt = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+con.getDesc()));
+        context.startActivity(tt);
+    }
+
+    public static void deleteContact(ContentResolver contactHelper, String number) {
+        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+        String[] args = new String[] { String.valueOf(getContactID(contactHelper,
+                number))};
+        ops.add(ContentProviderOperation.newDelete(ContactsContract.RawContacts.CONTENT_URI)
+                .withSelection(ContactsContract.RawContacts.CONTACT_ID + "=?", args).build());
+        try {
+            contactHelper.applyBatch(ContactsContract.AUTHORITY, ops);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (OperationApplicationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static long getContactID(ContentResolver contactHelper, String number) {
+        Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
+        String[] projection = { ContactsContract.PhoneLookup._ID };
+        Cursor cursor = null;
+        try {
+            cursor = contactHelper.query(contactUri, projection, null, null,null);
+            if (cursor.moveToFirst()) {
+                int personID = cursor.getColumnIndex(ContactsContract.PhoneLookup._ID);
+                return cursor.getLong(personID);
+            }
+            return -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+                cursor = null;
+            }
+        }
+        return -1;
     }
 }
