@@ -6,9 +6,9 @@ import android.graphics.drawable.Drawable;
 public class PagerModel {
     String id;
     String title;
-    Drawable res;
+    Bitmap res;
 
-    public PagerModel(String id, String title, Drawable res){
+    public PagerModel(String id, String title, Bitmap res){
         this.id=id;
         this.title=title;
         this.res = res;
@@ -20,7 +20,7 @@ public class PagerModel {
     public String getTitle(){
         return title;
     }
-    public Drawable getResIdes(){
+    public Bitmap getResIdes(){
         return res;
     }
 
@@ -30,7 +30,7 @@ public class PagerModel {
     public void setTitle(String title){
         this.title = title;
     }
-    public void setRes(Drawable res){
+    public void setRes(Bitmap res){
         this.res = res;
     }
 }

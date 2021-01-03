@@ -5,13 +5,13 @@ import android.graphics.drawable.Drawable;
 
 public class GalleryImage {
     private String path;
-    private Drawable d;
-    private Drawable rd;
+    private Bitmap d;
+    private Bitmap rd;
 
     public void setPath(String path) { this.path = path ;}
-    public void setD(Drawable d) { this.d = d; }
-    public void setRd(Drawable rd) {this.rd = d; }
+    public void setD(Bitmap d) { this.d = d; }
+    public void setRd(Bitmap rd) {this.rd = rd; }
     public String getPath() {return path;}
-    public Drawable getD() {return d;}
-    public Drawable getRd() {return rd;}
+    public Bitmap getD() {return d;}
+    public Bitmap getRd() {return rd;}
 }

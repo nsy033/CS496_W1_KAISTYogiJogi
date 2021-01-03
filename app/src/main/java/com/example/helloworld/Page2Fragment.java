@@ -159,7 +159,6 @@ public class Page2Fragment extends Fragment {
             Point size = new Point();
             display.getRealSize(size); // or getSize(size)
             int width = size.x;
-            int height = size.y;
 
             width /= 3;
             width -= 10;
@@ -167,12 +166,8 @@ public class Page2Fragment extends Fragment {
             imageView.setLayoutParams(new GridView.LayoutParams(width, width));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(5, 5, 5, 5);
-/*
-            Bitmap bmp =  BitmapFactory.decodeResource(context.getResources(), img[position]);
-            bmp = Bitmap.createScaledBitmap(bmp,10,10,false);
-            imageView.setImageBitmap(bmp);
-*/
-            imageView.setImageDrawable(img.get(position).getD());
+
+            imageView.setImageBitmap(img.get(position).getRd());
             final int pos = position;
 
             imageView.setOnClickListener(new View.OnClickListener() {
@@ -304,11 +299,16 @@ public class Page2Fragment extends Fragment {
                                 while (cursor.moveToNext()) {
                                     absolutePathOfImage = cursor.getString(column_index_data);
                                     File files = new File(absolutePathOfImage);
+
                                     Bitmap myBitmap = BitmapFactory.decodeFile(files.getAbsolutePath());
-                                    Drawable d = new BitmapDrawable(getResources(), myBitmap);
                                     GalleryImage gi = new GalleryImage();
-                                    gi.setRd(d);
-                                    gi.setD(d);
+
+                                    int w = myBitmap.getWidth();
+                                    int h = myBitmap.getHeight();
+                                    Bitmap resized = Bitmap.createScaledBitmap( myBitmap, w/5, h/5, true );
+
+                                    gi.setRd(resized);
+                                    gi.setD(myBitmap);
                                     gi.setPath(absolutePathOfImage);
                                     boolean flag = true;
                                     for(int i=0; i<img.size(); i++){
@@ -344,19 +344,19 @@ public class Page2Fragment extends Fragment {
         List<PagerModel> pagerArr = new ArrayList<>();
 
         for(int i=0;i<img.size(); i++){
-            pagerArr.add(new PagerModel(""+(i+1), "Pager Item #" + i, img.get(position).getD()));
+            pagerArr.add(new PagerModel(""+(i+1), "Pager Item #" + i, BitmapFactory.decodeFile(img.get(position).getPath())));
         }
 
         TestPagerAdapter adapter = new TestPagerAdapter(getContext(), pagerArr);
         ViewPager pager = (ViewPager) dialog.findViewById(R.id.pager);
         pager.setAdapter(adapter);
-        pager.setPageTransformer(true, new ZoomOutPageTransformer());
+        //pager.setPageTransformer(true, new ZoomOutPageTransformer());
         pager.setCurrentItem(position);
 
         dialog.show();
 
     }
-
+/*
     public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.85f;
         private static final float MIN_ALPHA = 0.5f;
@@ -394,5 +394,5 @@ public class Page2Fragment extends Fragment {
                 view.setAlpha(0f);
             }
         }
-    }
+    }*/
 }
