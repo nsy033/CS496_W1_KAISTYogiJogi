@@ -57,18 +57,6 @@ public class fragment2 extends Fragment {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                /**
-                View dialogView = (View) View.inflate(getActivity(),
-                        R.layout.dialog, null);
-                AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
-                ImageView ivPoster = (ImageView)dialogView.findViewById(R.id.imageView2);
-                ivPoster.setImageResource(img[position]);
-                dlg.setTitle("큰 포스터" );
-                dlg.setIcon(R.drawable.ic_launcher_foreground);
-                dlg.setView(dialogView);
-                dlg.setNegativeButton("Close", null);
-                dlg.show();
-                */
                 showDialog(position , view , img);
             }
         });

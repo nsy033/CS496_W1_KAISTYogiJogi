@@ -5,23 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".fragment3"
-    >
+    tools:context=".fragment3">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
 
         <GridView
             android:id="@+id/gridView_third_tab"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="9"
             android:columnWidth="100dp"
-            android:layout_gravity = "center_horizontal"
-            android:paddingTop="45dp"
-            android:numColumns="4" >
-        </GridView>
+            android:numColumns="4"
+            android:paddingTop="45dp"></GridView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:layout_weight="1">
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|left"
+                android:background="@drawable/spinner_background"
+                android:backgroundTint="#C1B9B9"
+                android:paddingTop="0dp"
+                android:spinnerMode="dropdown" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/button_go_dep"
+                android:text="바로가기" />
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

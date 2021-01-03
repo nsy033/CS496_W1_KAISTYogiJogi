@@ -4,28 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".Childfragment">
+    tools:context=".DepartmentActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
         android:orientation="vertical"
+        android:id="@+id/layout_dep"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="60dp">
+        android:paddingTop="15dp">
 
+        <TextView
+            android:id="@+id/dep_info"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="학과 정보"
+            android:textColor="#1B1B1B"
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="24sp"></TextView>
+        <!-- fragment에서 하는법
         <com.google.android.gms.maps.MapView
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:id="@+id/map"
             tools:context=".MapsActivity"
             android:name="com.google.android.gms.maps.SupportMapFragment" />
-
-        <ImageView
-           android:id="@+id/imageView_map"
+        -->
+        <fragment
             android:layout_width="match_parent"
-            android:layout_height="50dp"></ImageView>
+            android:layout_height="250dp"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:background="@drawable/customborder">></fragment>
+
+        <TextView
+            android:id="@+id/dep_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="New Text"
+            android:textColor="#1B1B1B"></TextView>
 
         <TextView
             android:id="@+id/building_num"
@@ -61,13 +81,13 @@
             android:layout_height="50dp"
             android:text="New Text"
             android:textColor="#1B1B1B"></TextView>
-        <!--
-        <ListView
-            android:id="@+id/listview_forchildfragment"
+
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            android:paddingTop="47dp"/>
-        -->
+            android:layout_height="50dp"
+            android:id="@+id/button_go_web"
+            android:text="학과 홈페이지 바로가기" />
+
+
     </LinearLayout>
 </FrameLayout>

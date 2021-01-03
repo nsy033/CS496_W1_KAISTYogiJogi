@@ -57,7 +57,9 @@ public class fragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_fragment1, null) ;
+        /**
         ListViewAdapter adapter = new ListViewAdapter();
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU)
         ListView listview = (ListView) view.findViewById(R.id.listview1);
@@ -70,59 +72,96 @@ public class fragment1 extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                /**
 
-                AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
-                Contact con = contactList.get(position);
-                dlg.setTitle("Name : " + con.getName() );
-                dlg.setMessage("PhoneNumber : " +
-                        con.getPhonenumber() +
-                        "\nAddress : " +
-                        con.getAddress());
-                dlg.setNegativeButton("Close", null);
-                dlg.show();
-                 */
                 Intent tt = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+contactList.get(position).getUser_phNumber()));
                 //Intent tt = new Intent("android.intent.action.CALL", Uri.parse("tel:010"));
                 startActivity(tt);
             }
         });
-
+        */
         return view ;
     }
 
 
     public void getContactList(){
         Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
-        String[] projection = {
-                ContactsContract.CommonDataKinds.Phone.NUMBER,
-                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-        };
+        Uri uri1 = ContactsContract.CommonDataKinds.Email.CONTENT_URI;
+        Uri uri2 = ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_URI;
 
-        String[] selectionArgs = null;
-        //ContentResolver ccc = getContentResolver();
-
-        String sortOrder = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-        Cursor cursor = getContext().getContentResolver().query(uri,projection,null,selectionArgs,sortOrder);
-        //Cursor cursor = getActivity().getContentResolver().query(uri,projection,null,null,null);
-
-        //LinkedHashSet<Contact> hashlist = new LinkedHashSet<>();
-        if (cursor.moveToFirst()){
-            do {
-                ContactItem newcontact = new ContactItem();
-
-                String user_name = cursor.getString(1);
-                newcontact.setUser_Name(user_name);
-                String phone_number = cursor.getString(0);
-                //String phone_number = "010-1333-4456";
-                newcontact.setUser_phNumber(phone_number);
-                String address = "test@kaist.ac.kr";
-                newcontact.setUser_Email(address);
-                contactList.add(newcontact);
-
-            }while(cursor.moveToNext());
+        Cursor cursor = null;
+        Cursor cursor1= null;
+        Cursor cursor2 = null;
+        ContentResolver contentResolver = getActivity().getContentResolver();
+        String sortorder = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
+        try{
+            cursor = contentResolver.query(uri, null,null,null, sortorder);
+            cursor1 = contentResolver.query(uri1, null,null,null, sortorder);
+            cursor2 = contentResolver.query(uri2, null,null,null, sortorder);
+        } catch(Exception ex) {
+            Log.e("Error on contact", ex.getMessage());
         }
 
+        if(cursor.moveToFirst()) {
+            cursor1.moveToFirst();
+            cursor2.moveToFirst();
+
+            do {
+                ContactItem contactItem = new ContactItem();
+/*
+                String[] temp = cursor.getColumnNames();
+                for(int i=0; i<temp.length; i++){
+                    System.out.println(temp[i]);
+                }
+*/
+/*
+                if (Integer.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0)
+                {
+                    // Query phone here. Covered next
+                    int ColumeIndex_ID = cursor.getColumnIndex(ContactsContract.Contacts._ID);
+                    String id = cursor.getString(ColumeIndex_ID);
+                    Cursor phones = getContentResolver().query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+ id,
+                            null,
+                            null);
+                    while (phones.moveToNext()) {
+                        String str = (String) ContactsContract.CommonDataKinds.Phone.NUMBER;
+                        int tmp = (int) phones.getColumnIndex(str);
+                        String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        Log.i("Number", phoneNumber);
+                        contactItem.setUser_phNumber(phoneNumber);
+                    }
+                    phones.close();
+                }
+ */
+                contactItem.setUser_name(cursor.getString(
+                        cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                ));
+                contactItem.setUser_phNumber(cursor.getString(
+                        cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                ));
+                contactItem.setPhoto_id(cursor.getString(
+                        cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_ID)
+                ));
+                contactItem.setMail(cursor1.getString(
+                        cursor1.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)
+                ));
+                contactItem.setAddress(cursor2.getString(
+                        cursor2.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.DATA)
+                ));
+
+                /*
+                contactItem.setPerson_id(cursor.getString(
+                        cursor.getColumnIndex(ContactsContract.Contacts._ID)
+                ));*/
+
+                contactList.add(contactItem);
+                cursor1.moveToNext();
+                cursor2.moveToNext();
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
     }
 
     public ListViewAdapter add_item_to_listviewadapter(ListViewAdapter myadapter){
@@ -137,7 +176,7 @@ public class fragment1 extends Fragment {
         for(int i = 0; i< contactList.size() ; i++){
             ContactItem mv = contactList.get(i);
             str = "";
-            str = str + mv.getUser_Name();
+            str = str + mv.getUser_name();
             String str2 = "";
             str2 = str2 + mv.getUser_phNumber();
 
@@ -185,9 +224,9 @@ public class fragment1 extends Fragment {
 
                 ContactItem contact = new ContactItem();
 
-                contact.setUser_Name(contentObject.getString("name"));
+                contact.setUser_name(contentObject.getString("name"));
                 contact.setUser_phNumber(contentObject.getString("phonenumber"));
-                contact.setUser_Email(contentObject.getString("address"));
+                contact.setAddress(contentObject.getString("address"));
 
                 contactList.add(contact);
             }
