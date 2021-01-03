@@ -11,6 +11,6 @@
         android:columnWidth="50dp"
         android:gravity="center_horizontal"
         android:numColumns="3"
-        android:paddingTop="50dp"></GridView>
+        android:paddingTop="42dp"></GridView>
 
 </LinearLayout>

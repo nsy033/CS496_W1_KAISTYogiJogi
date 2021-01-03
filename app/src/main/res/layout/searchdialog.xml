@@ -9,6 +9,7 @@
             android:id="@+id/et5"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:backgroundTint = "#856523"
             android:textSize = "15sp"
             android:layout_weight="1"
             android:layout_gravity="center"

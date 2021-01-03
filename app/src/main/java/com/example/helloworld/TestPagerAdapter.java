@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -42,6 +43,7 @@ public class TestPagerAdapter extends PagerAdapter {
 
         ((ViewPager) container).addView(view);
         PagerModel model = pagerArr.get(position);
+        //iv.setImageResource(R.drawable.iconuser);
         iv.setImageResource(img[position]);
         tv.setText(""+(position+1) + " / " + getCount());
         return view;

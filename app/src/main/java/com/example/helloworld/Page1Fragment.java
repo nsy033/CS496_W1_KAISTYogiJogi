@@ -146,7 +146,7 @@ public class Page1Fragment extends Fragment {
                                     con.setAddress(address);
 
                                     contactItems.add(con);
-                                    adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.user), con.getUser_name(), con.getUser_phNumber(),
+                                    adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.iconuser), con.getUser_name(), con.getUser_phNumber(),
                                             con.getMail(), con.getAddress());
                                     adapter.notifyDataSetChanged();
                                     listview.setAdapter(adapter);
@@ -245,7 +245,7 @@ public class Page1Fragment extends Fragment {
                                     ContactItem con = contactItems.get(index[i]);
                                     //contactItems = new ArrayList<>();
                                     //contactItems.add(con);
-                                    adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.user), con.getUser_name(), con.getUser_phNumber(),
+                                    adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.iconuser), con.getUser_name(), con.getUser_phNumber(),
                                             con.getMail(), con.getAddress());
                                 }
                             }
@@ -276,7 +276,7 @@ public class Page1Fragment extends Fragment {
                 for(int i = 0; i< contactItems.size() ; i++){
 
                     ContactItem ci = contactItems.get(i);
-                    adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.user), ci.getUser_name(), ci.getUser_phNumber(),
+                    adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.iconuser), ci.getUser_name(), ci.getUser_phNumber(),
                             ci.getMail(), ci.getAddress());
 
                 }
@@ -288,7 +288,7 @@ public class Page1Fragment extends Fragment {
         for(int i = 0; i< contactItems.size() ; i++){
 
             ContactItem ci = contactItems.get(i);
-            adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.user), ci.getUser_name(), ci.getUser_phNumber(),
+            adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.iconuser), ci.getUser_name(), ci.getUser_phNumber(),
                     ci.getMail(), ci.getAddress());
 
         }

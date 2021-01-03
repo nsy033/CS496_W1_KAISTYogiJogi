@@ -151,7 +151,7 @@ public class ListViewAdapter extends BaseAdapter {
                                 String add = edt4.getText().toString();
 
                                 ListViewItem tmp = new ListViewItem();
-                                tmp.setIcon(ContextCompat.getDrawable(context, R.drawable.user));
+                                tmp.setIcon(ContextCompat.getDrawable(context, R.drawable.iconuser));
                                 tmp.setTitle(name);
                                 tmp.setDesc(number);
                                 tmp.setMail(mail);

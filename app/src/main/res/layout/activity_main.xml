@@ -19,11 +19,11 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="#A11414"
+        app:tabIndicatorColor="#8A7C52"
         app:tabRippleColor="#FFFFFF"
         app:tabTextColor="#706B6B">
 
