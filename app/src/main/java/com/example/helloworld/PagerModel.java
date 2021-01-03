@@ -1,14 +1,17 @@
 package com.example.helloworld;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+
 public class PagerModel {
     String id;
     String title;
-    int resId;
+    Drawable res;
 
-    public PagerModel(String id, String title, int resId){
+    public PagerModel(String id, String title, Drawable res){
         this.id=id;
         this.title=title;
-        this.resId = resId;
+        this.res = res;
     }
 
     public String getId(){
@@ -17,8 +20,8 @@ public class PagerModel {
     public String getTitle(){
         return title;
     }
-    public int getResIdesId(){
-        return resId;
+    public Drawable getResIdes(){
+        return res;
     }
 
     public void setId(String id){
@@ -27,7 +30,7 @@ public class PagerModel {
     public void setTitle(String title){
         this.title = title;
     }
-    public void setResId(int resId){
-        this.resId = resId;
+    public void setRes(Drawable res){
+        this.res = res;
     }
 }

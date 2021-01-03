@@ -44,7 +44,7 @@ public class TestPagerAdapter extends PagerAdapter {
         ((ViewPager) container).addView(view);
         PagerModel model = pagerArr.get(position);
         //iv.setImageResource(R.drawable.iconuser);
-        iv.setImageResource(img[position]);
+        iv.setImageDrawable(img.get(position).getD());
         tv.setText(""+(position+1) + " / " + getCount());
         return view;
     }
