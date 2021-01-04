@@ -168,15 +168,7 @@ public class Page2Fragment extends Fragment {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //View dialogView = (View) View.inflate(getActivity(), R.layout.dialog, null);
-                    //AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
-                    //ImageView ivPoster = (ImageView) dialogView.findViewById(R.id.ivPoster);
-                    //ivPoster.setImageResource(img[pos]);
-                    //dlg.setTitle("Title");
-                    //dlg.setIcon(R.drawable.ic_launcher_foreground);
-                    //dlg.setView(dialogView);
-                    //dlg.setPositiveButton("CLOSE", null);
-                    //dlg.show();
+
                     showDialog(pos, view);
                 }
             });
@@ -186,32 +178,32 @@ public class Page2Fragment extends Fragment {
                 public boolean onLongClick(View view) {
                     android.app.AlertDialog.Builder adb = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
                     adb.setTitle("Delete")
-                       .setNeutralButton("CONFIRM", new DialogInterface.OnClickListener() {
-                           @Override
-                           public void onClick(DialogInterface dialog, int which) {
+                            .setNeutralButton("CONFIRM", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                               String imagePath = img.get(position).getPath();
-                               img.remove(position);
+                                    String imagePath = img.get(position).getPath();
+                                    img.remove(position);
 
-                               File file = new File(imagePath).getAbsoluteFile();
+                                    File file = new File(imagePath).getAbsoluteFile();
 
-                               if(file.exists()){
-                                   System.gc();
-                                   System.runFinalization();
-                                   boolean ch = file.delete();
-                                   getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + imagePath)));
-                               }
+                                    if(file.exists()){
+                                        System.gc();
+                                        System.runFinalization();
+                                        boolean ch = file.delete();
+                                        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + imagePath)));
+                                    }
 
-                               adapter.notifyDataSetChanged();
+                                    adapter.notifyDataSetChanged();
 
-                           }
-                    })
-                    .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                        }
-                    });
+                                }
+                            });
                     AlertDialog finalDialog = adb.create();
                     finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                         @Override
@@ -347,8 +339,16 @@ public class Page2Fragment extends Fragment {
 
         List<PagerModel> pagerArr = new ArrayList<>();
 
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getRealSize(size); // or getSize(size)
+        int width = size.x;
+        int height = size.y;
+        Bitmap bitmap = BitmapFactory.decodeFile(img.get(position).getPath());
+        Bitmap.createScaledBitmap( bitmap, width, height, true );
+
         for(int i=0;i<img.size(); i++){
-            pagerArr.add(new PagerModel(""+(i+1), "Pager Item #" + i, BitmapFactory.decodeFile(img.get(position).getPath())));
+            pagerArr.add(new PagerModel(""+(i+1), "Pager Item #" + i, bitmap));
         }
 
         TestPagerAdapter adapter = new TestPagerAdapter(getContext(), pagerArr);
@@ -364,15 +364,12 @@ public class Page2Fragment extends Fragment {
     public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.85f;
         private static final float MIN_ALPHA = 0.5f;
-
         public void transformPage(View view, float position) {
             int pageWidth = view.getWidth();
             int pageHeight = view.getHeight();
-
             if (position < -1) { // [-Infinity,-1)
                 // This page is way off-screen to the left.
                 view.setAlpha(0f);
-
             } else if (position <= 1) { // [-1,1]
                 // Modify the default slide transition to shrink the page as well
                 float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
@@ -383,16 +380,13 @@ public class Page2Fragment extends Fragment {
                 } else {
                     view.setTranslationX(-horzMargin + vertMargin / 2);
                 }
-
                 // Scale the page down (between MIN_SCALE and 1)
                 view.setScaleX(scaleFactor);
                 view.setScaleY(scaleFactor);
-
                 // Fade the page relative to its size.
                 view.setAlpha(MIN_ALPHA +
                         (scaleFactor - MIN_SCALE) /
                                 (1 - MIN_SCALE) * (1 - MIN_ALPHA));
-
             } else { // (1,+Infinity]
                 // This page is way off-screen to the right.
                 view.setAlpha(0f);

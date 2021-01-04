@@ -33,9 +33,9 @@ public class Page3Fragment extends Fragment {
     public static int check_pos_for_button = 0;
 
     public static int dep_icon[] = { R.drawable.civil ,R.drawable.business,R.drawable.mechanic,R.drawable.physics,
-            R.drawable.brain,R.drawable.system,R.drawable.dna,R.drawable.biochem,
+            R.drawable.brain,R.drawable.system,R.drawable.bio,R.drawable.biochem,
             R.drawable.design,R.drawable.math,R.drawable.material,R.drawable.nuclear,
-            R.drawable.electrical,R.drawable.computer,R.drawable.chemistry,R.drawable.aerospace};
+            R.drawable.electrical,R.drawable.computer,R.drawable.chem,R.drawable.aerospace};
 
     public static String dep_name[] = {  "건설환경공학과", "기술경영학과", "기계공학과", "물리학과", "바이오 및\n뇌공학과",
             "산업 및\n시스템공학과", "생명과학과", "생명화학공학과", "산업디자인학과", "수리과학과",
@@ -133,7 +133,6 @@ public class Page3Fragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
 
 
         return view ;

@@ -79,6 +79,8 @@ public class Page1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page1, null) ;
+        contactItems.clear();
+        ((MainActivity) getContext()).getContactList();
 
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU) ;
 
@@ -206,51 +208,51 @@ public class Page1Fragment extends Fragment {
                 adb.setView(linear);
 
                 adb.setTitle("Search")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                            String name = edt.getText().toString();
-                            int[] index = new int[1000];
-                            int count=0;
-                            //edt.setText("Helloworld");
+                                String name = edt.getText().toString();
+                                int[] index = new int[1000];
+                                int count=0;
+                                //edt.setText("Helloworld");
 
-                            for (int i = 0; i < contactItems.size(); i++) {
-                                ContactItem tmp = contactItems.get(i);
-                                String tmp_name = tmp.getUser_name();
+                                for (int i = 0; i < contactItems.size(); i++) {
+                                    ContactItem tmp = contactItems.get(i);
+                                    String tmp_name = tmp.getUser_name();
 
-                                if (tmp_name.toLowerCase().contains(name.toLowerCase())) {
-                                    index[count++] = i;
+                                    if (tmp_name.toLowerCase().contains(name.toLowerCase())) {
+                                        index[count++] = i;
+                                    }
                                 }
-                            }
 
-                            if (count > 0) {
-                                adapter.clearItem();
-                                for(int i=0;i<count; i++) {
-                                    ContactItem con = contactItems.get(index[i]);
+                                if (count > 0) {
+                                    adapter.clearItem();
+                                    for(int i=0;i<count; i++) {
+                                        ContactItem con = contactItems.get(index[i]);
+                                        //contactItems = new ArrayList<>();
+                                        //contactItems.add(con);
+                                        adapter.addItem(iconuser, con.getUser_name(), con.getUser_phNumber(),
+                                                con.getMail(), con.getAddress());
+                                    }
+                                }
+                                else {
+                                    adapter.clearItem();
                                     //contactItems = new ArrayList<>();
-                                    //contactItems.add(con);
-                                    adapter.addItem(iconuser, con.getUser_name(), con.getUser_phNumber(),
-                                            con.getMail(), con.getAddress());
                                 }
-                            }
-                            else {
-                                adapter.clearItem();
-                                //contactItems = new ArrayList<>();
-                            }
 
-                            adapter.notifyDataSetChanged();
-                            listview.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                                listview.setAdapter(adapter);
 
-                            dialog.dismiss();
-                        }
-                    })
-                    .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
                 AlertDialog finalDialog = adb.create();
                 finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
@@ -279,6 +281,7 @@ public class Page1Fragment extends Fragment {
             }
         });
 
+        adapter.clearItem();
         for(int i = 0; i< contactItems.size() ; i++){
 
             ContactItem ci = contactItems.get(i);

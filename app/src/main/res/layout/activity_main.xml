@@ -27,6 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tabIndicatorColor="#8A7C52"
         app:tabRippleColor="#FFFFFF"
+        app:tabTextAppearance="@style/tab_text"
         app:tabTextColor="#706B6B">
 
         <com.google.android.material.tabs.TabItem
@@ -46,4 +47,3 @@
     </com.google.android.material.tabs.TabLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

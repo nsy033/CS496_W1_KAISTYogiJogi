@@ -35,15 +35,7 @@ public class MainActivity extends AppCompatActivity {
     //static ArrayList<Contact> contactList = new ArrayList<Contact>();
     static ArrayList<ContactItem> contactItems = new ArrayList<ContactItem>();
     static ArrayList<GalleryImage> img = new ArrayList<>();
-    /*
-    static final int img[] = {
-            R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
-            R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8,
-            R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
-            R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8
-    };
-    */
-    
+
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -58,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Bitmap resized = Bitmap.createScaledBitmap( tmpb, w/10, h/10, true );
         iconuser = new BitmapDrawable(getResources(), resized);
 
-        getContactList();
+        //getContactList();
         try {
             getGallery();
         }catch (Exception e) {
@@ -97,17 +89,13 @@ public class MainActivity extends AppCompatActivity {
             GalleryImage gi = new GalleryImage();
 /*
             myBitmap = BitmapFactory.decodeFile(files.getAbsolutePath());
-
             Drawable d = new BitmapDrawable(getResources(), myBitmap);
-
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 4;
-
             int w = myBitmap.getWidth();
             int h = myBitmap.getHeight();
             Bitmap resized = Bitmap.createScaledBitmap( myBitmap, w/5, h/5, true );
             Drawable rd = new BitmapDrawable(getResources(), resized);
-
             gi.setRd(rd);
             gi.setD(d);*/
 
@@ -122,23 +110,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-/*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            try {
-                Bitmap btm = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
-                Drawable d = new BitmapDrawable(getResources(), btm);
-                img.add(d);
-            } catch (IOException e) {
-                e.printStackTrace();
+    /*
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+                Uri selectedImageUri = data.getData();
+                try {
+                    Bitmap btm = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                    Drawable d = new BitmapDrawable(getResources(), btm);
+                    img.add(d);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-
-    }
-*/
+    */
     public ArrayList<ContactItem> getContactList() {
 
         Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
