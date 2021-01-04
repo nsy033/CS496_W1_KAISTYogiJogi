@@ -1,10 +1,9 @@
 package com.example.helloworld;
 
-import android.graphics.drawable.Drawable;
-import android.widget.GridView;
+import android.graphics.Bitmap;
 
 public class GridViewItem {
-    private Drawable dep_iconDrawable ; //학과아이콘
+    private Bitmap dep_iconDrawable ; //학과아이콘
     private String dep_str ; // 학과이름
     private String descrip ; //학과
     String position ; //건물 위치
@@ -46,12 +45,12 @@ public class GridViewItem {
         this.resId = resId;
     }
 
-    public void setIcon(Drawable icon) { this.dep_iconDrawable = icon ; }
+    public void setIcon(Bitmap icon) { this.dep_iconDrawable = icon ; }
     public void setStr(String title) {
         this.dep_str = title ;
     }
 
-    public Drawable getIcon() { return this.dep_iconDrawable ; }
+    public Bitmap getIcon() { return this.dep_iconDrawable ; }
     public String getStr() {
         return this.dep_str ;
     }

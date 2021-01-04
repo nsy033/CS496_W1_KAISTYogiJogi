@@ -1,6 +1,9 @@
 package com.example.helloworld;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import org.json.JSONArray;
@@ -33,13 +36,13 @@ public class Page3Fragment extends Fragment {
     public static int check_pos_for_button = 0;
 
     public static int dep_icon[] = { R.drawable.civil ,R.drawable.business,R.drawable.mechanic,R.drawable.physics,
-            R.drawable.brain,R.drawable.system,R.drawable.dna,R.drawable.biochem,
+            R.drawable.brain,R.drawable.system,R.drawable.bio,R.drawable.biochem,
             R.drawable.design,R.drawable.math,R.drawable.material,R.drawable.nuclear,
-            R.drawable.electrical,R.drawable.computer,R.drawable.chemistry,R.drawable.aerospace};
+            R.drawable.electric,R.drawable.computer,R.drawable.chem,R.drawable.aerospace};
 
-    public static String dep_name[] = {  "건설환경공학과", "기술경영학과", "기계공학과", "물리학과", "바이오 및\n뇌공학과",
-            "산업 및\n시스템공학과", "생명과학과", "생명화학공학과", "산업디자인학과", "수리과학과",
-            "신소재공학과", "원자력 및\n양자공학과", "전기 및\n전자공학과", "전산학과", "화학과", "항공우주공학과" };
+    public static String dep_name[] = {  "CEE", "BTM", "ME", "PH", "BBE",
+            "ISE", "BS", "CBE", "ID", "MS",
+            "MSE", "NQE", "EE", "CS", "CH", "AE" };
 
     public Page3Fragment() { }
 
@@ -67,9 +70,11 @@ public class Page3Fragment extends Fragment {
 
 
         //Spinner adapter
-        String dep_name_for_spinner[] = { "-학과 선택-", "건설환경공학과", "기술경영학과", "기계공학과", "물리학과", "바이오 및\n뇌공학과",
-                "산업 및\n시스템공학과", "생명과학과", "생명화학공학과", "산업디자인학과", "수리과학과",
-                "신소재공학과", "원자력 및\n양자공학과", "전기 및\n전자공학과", "전산학과", "화학과", "항공우주공학과" };
+        String dep_name_for_spinner[] = { " - Choose Department - ", "Civil and Environmental Engineering", "Business Technological Management",
+                "Mechanical Engineering", "Physics", "Bio and Brain Engineering",
+                "Industrial and Systemic Engineering", "Biological Sciences", "Chemical and Biomolecular Engineering", "Industrial Design",
+                "Mathematical Sciences", "Materials Science and Engineering", "Nuclear and Quantum Engineering",
+                "Electrical Engineering", "School of Computing", "Chemistry", "Aerospace Engineering" };
 
         Spinner spiner = (Spinner) view.findViewById(R.id.spinner1);
         ArrayAdapter<String> spinadapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,dep_name_for_spinner);
@@ -79,7 +84,8 @@ public class Page3Fragment extends Fragment {
         //
         //Button Control, Listener
         //
-        Button button1 = (Button) view.findViewById(R.id.button_go_dep);
+        ImageButton button1 = (ImageButton) view.findViewById(R.id.button_go_dep);
+        button1.setScaleType(ImageButton.ScaleType.FIT_CENTER);
 
         button1.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -89,13 +95,6 @@ public class Page3Fragment extends Fragment {
                 intent.putExtra("dep_icon",dep_icon);
                 intent.putExtra("dep_name",dep_name);
                 startActivity(intent);
-                /**
-                 Fragment newFragment = new DepartmentActivity(check_pos_for_button, dep_icon, dep_name, childFragmentItemList);
-                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                 transaction.replace(R.id.parent_id, newFragment);
-                 transaction.addToBackStack(null);
-                 transaction.commit();
-                 */
             }
         });
 
@@ -110,13 +109,6 @@ public class Page3Fragment extends Fragment {
                 intent.putExtra("dep_icon",dep_icon);
                 intent.putExtra("dep_name",dep_name);
                 startActivity(intent);
-                /**
-                 Fragment newFragment = new DepartmentActivity(position, dep_icon, dep_name, childFragmentItemList);
-                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                 transaction.replace(R.id.parent_id, newFragment);
-                 transaction.addToBackStack(null);
-                 transaction.commit();
-                 */
             }
         });
 
@@ -146,7 +138,13 @@ public class Page3Fragment extends Fragment {
 
 
         for(int i=0; i<dep_icon.length;i++){
-            myadapter.addItem(ContextCompat.getDrawable(getActivity(), dep_icon[i]), dep_name[i]); //건설환경공학과
+
+            Bitmap tmpb = BitmapFactory.decodeResource(getResources(), dep_icon[i]);
+            int w = tmpb.getWidth();
+            int h = tmpb.getHeight();
+            Bitmap resized = Bitmap.createScaledBitmap( tmpb, w/10, h/10, true );
+
+            myadapter.addItem(new BitmapDrawable(getResources(), resized), dep_name[i]); //건설환경공학과
         }
 
         return myadapter;

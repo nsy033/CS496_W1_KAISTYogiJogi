@@ -9,7 +9,7 @@
         android:id="@+id/listview1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider = "#B6A570"
+        android:divider = "#C8BB92"
         android:dividerHeight="2px"
         android:paddingTop="40dp">
 

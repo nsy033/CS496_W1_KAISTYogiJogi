@@ -79,6 +79,8 @@ public class Page1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page1, null) ;
+        contactItems.clear();
+        ((MainActivity) getContext()).getContactList();
 
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU) ;
 
@@ -279,6 +281,7 @@ public class Page1Fragment extends Fragment {
             }
         });
 
+        adapter.clearItem();
         for(int i = 0; i< contactItems.size() ; i++){
 
             ContactItem ci = contactItems.get(i);

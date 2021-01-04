@@ -168,15 +168,7 @@ public class Page2Fragment extends Fragment {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //View dialogView = (View) View.inflate(getActivity(), R.layout.dialog, null);
-                    //AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
-                    //ImageView ivPoster = (ImageView) dialogView.findViewById(R.id.ivPoster);
-                    //ivPoster.setImageResource(img[pos]);
-                    //dlg.setTitle("Title");
-                    //dlg.setIcon(R.drawable.ic_launcher_foreground);
-                    //dlg.setView(dialogView);
-                    //dlg.setPositiveButton("CLOSE", null);
-                    //dlg.show();
+
                     showDialog(pos, view);
                 }
             });
@@ -347,8 +339,16 @@ public class Page2Fragment extends Fragment {
 
         List<PagerModel> pagerArr = new ArrayList<>();
 
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getRealSize(size); // or getSize(size)
+        int width = size.x;
+        int height = size.y;
+        Bitmap bitmap = BitmapFactory.decodeFile(img.get(position).getPath());
+        Bitmap.createScaledBitmap( bitmap, width, height, true );
+
         for(int i=0;i<img.size(); i++){
-            pagerArr.add(new PagerModel(""+(i+1), "Pager Item #" + i, BitmapFactory.decodeFile(img.get(position).getPath())));
+            pagerArr.add(new PagerModel(""+(i+1), "Pager Item #" + i, bitmap));
         }
 
         TestPagerAdapter adapter = new TestPagerAdapter(getContext(), pagerArr);

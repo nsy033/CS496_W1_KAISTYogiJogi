@@ -35,15 +35,7 @@ public class MainActivity extends AppCompatActivity {
     //static ArrayList<Contact> contactList = new ArrayList<Contact>();
     static ArrayList<ContactItem> contactItems = new ArrayList<ContactItem>();
     static ArrayList<GalleryImage> img = new ArrayList<>();
-    /*
-    static final int img[] = {
-            R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
-            R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8,
-            R.drawable.winter1, R.drawable.winter2, R.drawable.winter3, R.drawable.winter4,
-            R.drawable.winter5, R.drawable.winter6, R.drawable.winter7, R.drawable.winter8
-    };
-    */
-    
+
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -58,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Bitmap resized = Bitmap.createScaledBitmap( tmpb, w/10, h/10, true );
         iconuser = new BitmapDrawable(getResources(), resized);
 
-        getContactList();
+        //getContactList();
         try {
             getGallery();
         }catch (Exception e) {
