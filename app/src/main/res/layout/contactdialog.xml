@@ -1,79 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="#FFF"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <EditText
             android:id="@+id/et1"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:backgroundTint = "#856523"
-            android:textSize = "15sp"
-            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:hint="Name"/>
+            android:layout_weight="1"
+            android:backgroundTint="#856523"
+            android:hint="Name"
+            android:textColor="#000"
+            android:textColorHint="#C1C1C1"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <EditText
             android:id="@+id/et2"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:backgroundTint = "#856523"
-            android:textSize = "15sp"
-            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:hint="Phone Number"/>
+            android:layout_weight="1"
+            android:backgroundTint="#856523"
+            android:hint="Phone Number"
+            android:textColor="#000"
+            android:textColorHint="#C1C1C1"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <EditText
             android:id="@+id/et3"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:backgroundTint = "#856523"
-            android:textSize = "15sp"
-            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:hint="Email"/>
+            android:layout_weight="1"
+            android:backgroundTint="#856523"
+            android:hint="Email"
+            android:textColor="#000"
+            android:textColorHint="#C1C1C1"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <EditText
             android:id="@+id/et4"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:backgroundTint = "#856523"
-            android:textSize = "15sp"
-            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:hint="Address"/>
+            android:layout_weight="1"
+            android:backgroundTint="#856523"
+            android:hint="Address"
+            android:textColor="#000"
+            android:textColorHint="#C1C1C1"
+            android:textSize="15sp" />
 
     </LinearLayout>
 

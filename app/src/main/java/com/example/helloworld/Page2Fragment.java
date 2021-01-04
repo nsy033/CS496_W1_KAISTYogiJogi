@@ -8,20 +8,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.ImageDecoder;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Display;
@@ -35,6 +26,10 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import java.io.File;
 import java.io.IOException;
@@ -189,7 +184,7 @@ public class Page2Fragment extends Fragment {
             imageView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    android.app.AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                    android.app.AlertDialog.Builder adb = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
                     adb.setTitle("Delete")
                        .setNeutralButton("CONFIRM", new DialogInterface.OnClickListener() {
                            @Override
@@ -216,8 +211,17 @@ public class Page2Fragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
 
                         }
-                    })
-                    .show();
+                    });
+                    AlertDialog finalDialog = adb.create();
+                    finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface arg0) {
+                            finalDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#6E6557"));
+                            finalDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#6E6557"));
+                            finalDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#6E6557"));
+                        }
+                    });
+                    finalDialog.show();
                     return true;
                 }
             });

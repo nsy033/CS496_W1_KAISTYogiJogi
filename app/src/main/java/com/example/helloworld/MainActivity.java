@@ -1,9 +1,5 @@
 package com.example.helloworld;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
@@ -18,20 +14,15 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-
-import static android.graphics.ImageDecoder.decodeDrawable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private long time = 0;
     public static Context context_main;
+    public static Drawable iconuser;
 
     //static ArrayList<Contact> contactList = new ArrayList<Contact>();
     static ArrayList<ContactItem> contactItems = new ArrayList<ContactItem>();
@@ -59,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context_main = this;
+
+        Bitmap tmpb = BitmapFactory.decodeResource(getResources(), R.drawable.iconuser);
+        int w = tmpb.getWidth();
+        int h = tmpb.getHeight();
+        Bitmap resized = Bitmap.createScaledBitmap( tmpb, w/10, h/10, true );
+        iconuser = new BitmapDrawable(getResources(), resized);
 
         getContactList();
         try {

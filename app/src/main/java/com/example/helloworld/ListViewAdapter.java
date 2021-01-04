@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.RemoteException;
@@ -18,10 +19,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -29,10 +28,11 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 
 import static com.example.helloworld.MainActivity.contactItems;
-//import static com.example.helloworld.MainActivity.contactList;
 import static com.example.helloworld.Page1Fragment.adapter;
 import static com.example.helloworld.Page1Fragment.listview;
 import static com.example.helloworld.Page1Fragment.newcontact;
+
+//import static com.example.helloworld.MainActivity.contactList;
 
 public class ListViewAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
@@ -90,8 +90,7 @@ public class ListViewAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 ListViewItem con = listViewItemList.get(position);
-                AlertDialog.Builder adb = new AlertDialog.Builder(context);
-                AlertDialog dialog = adb.create();
+                AlertDialog.Builder adb = new AlertDialog.Builder(context, R.style.MyDialogTheme);
                 adb.setTitle(con.getTitle())
                         .setNeutralButton("CANCEL", new DialogInterface.OnClickListener() {
                             @Override
@@ -110,8 +109,17 @@ public class ListViewAdapter extends BaseAdapter {
                             public void onClick(DialogInterface dialog, int which) {
                                 call(context, position);
                             }
-                        })
-                        .show();
+                        });
+                AlertDialog finalDialog = adb.create();
+                finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        finalDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#6E6557"));
+                        finalDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#6E6557"));
+                        finalDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#6E6557"));
+                    }
+                });
+                finalDialog.show();
             }
         });
 
@@ -121,8 +129,7 @@ public class ListViewAdapter extends BaseAdapter {
                 ListViewItem con = listViewItemList.get(position);
 
                 final LinearLayout linear = (LinearLayout) View.inflate(context, R.layout.contactdialog, null);
-                AlertDialog.Builder adb = new AlertDialog.Builder(context);
-                AlertDialog dialog = adb.create();
+                AlertDialog.Builder adb = new AlertDialog.Builder(context, R.style.MyDialogTheme);
 
                 EditText edt = linear.findViewById(R.id.et1);
                 adb.setView(linear);
@@ -261,7 +268,16 @@ public class ListViewAdapter extends BaseAdapter {
 
                             }
                         });
-                adb.show();
+                AlertDialog finalDialog = adb.create();
+                finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        finalDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#6E6557"));
+                        finalDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#6E6557"));
+                        finalDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#6E6557"));
+                    }
+                });
+                finalDialog.show();
                 return true;
             }
         });

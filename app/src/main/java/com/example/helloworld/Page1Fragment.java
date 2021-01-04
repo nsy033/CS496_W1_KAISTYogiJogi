@@ -3,50 +3,27 @@ package com.example.helloworld;
 import android.app.AlertDialog;
 import android.content.ContentProviderOperation;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.OperationApplicationException;
-import android.content.SharedPreferences;
-import android.content.res.AssetManager;
-import android.database.Cursor;
-import android.net.Uri;
+import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.os.RemoteException;
 import android.provider.ContactsContract;
-import android.text.Editable;
-import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.fragment.app.Fragment;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-//import static com.example.helloworld.MainActivity.contactList;
-import static android.content.Context.MODE_PRIVATE;
 import static com.example.helloworld.MainActivity.contactItems;
-import static com.example.helloworld.ListViewAdapter.listViewItemList;
+import static com.example.helloworld.MainActivity.iconuser;
+
+//import static com.example.helloworld.MainActivity.contactList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -122,7 +99,7 @@ public class Page1Fragment extends Fragment {
             public void onClick(View view) {
                 //Toast.makeText(getContext(), "helloworld", Toast.LENGTH_LONG).show();
                 final LinearLayout linear = (LinearLayout) View.inflate(getActivity(), R.layout.contactdialog, null);
-                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
                 adb.setView(linear)
                         .setTitle("New Contact")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -146,7 +123,8 @@ public class Page1Fragment extends Fragment {
                                     con.setAddress(address);
 
                                     contactItems.add(con);
-                                    adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.iconuser), con.getUser_name(), con.getUser_phNumber(),
+
+                                    adapter.addItem(iconuser, con.getUser_name(), con.getUser_phNumber(),
                                             con.getMail(), con.getAddress());
                                     adapter.notifyDataSetChanged();
                                     listview.setAdapter(adapter);
@@ -204,8 +182,17 @@ public class Page1Fragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                             }
-                        })
-                        .show();
+                        });
+                AlertDialog finalDialog = adb.create();
+                finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        finalDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#6E6557"));
+                        finalDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#6E6557"));
+                        finalDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#6E6557"));
+                    }
+                });
+                finalDialog.show();
             }
         });
 
@@ -214,9 +201,7 @@ public class Page1Fragment extends Fragment {
                 //Toast.makeText(getContext(), "helloworld", Toast.LENGTH_LONG).show();
 
                 final LinearLayout linear = (LinearLayout) View.inflate(getContext(), R.layout.searchdialog, null);
-                AlertDialog.Builder adb = new AlertDialog.Builder(getContext());
-                AlertDialog dialog = adb.create();
-
+                AlertDialog.Builder adb = new AlertDialog.Builder(getContext(), R.style.MyDialogTheme);
                 EditText edt = linear.findViewById(R.id.et5);
                 adb.setView(linear);
 
@@ -245,7 +230,7 @@ public class Page1Fragment extends Fragment {
                                     ContactItem con = contactItems.get(index[i]);
                                     //contactItems = new ArrayList<>();
                                     //contactItems.add(con);
-                                    adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.iconuser), con.getUser_name(), con.getUser_phNumber(),
+                                    adapter.addItem(iconuser, con.getUser_name(), con.getUser_phNumber(),
                                             con.getMail(), con.getAddress());
                                 }
                             }
@@ -265,8 +250,17 @@ public class Page1Fragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    })
-                    .show();
+                    });
+                AlertDialog finalDialog = adb.create();
+                finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        finalDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#6E6557"));
+                        finalDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#6E6557"));
+                        finalDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.parseColor("#6E6557"));
+                    }
+                });
+                finalDialog.show();
             }
         });
 
@@ -276,7 +270,7 @@ public class Page1Fragment extends Fragment {
                 for(int i = 0; i< contactItems.size() ; i++){
 
                     ContactItem ci = contactItems.get(i);
-                    adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.iconuser), ci.getUser_name(), ci.getUser_phNumber(),
+                    adapter.addItem(iconuser, ci.getUser_name(), ci.getUser_phNumber(),
                             ci.getMail(), ci.getAddress());
 
                 }
@@ -288,7 +282,7 @@ public class Page1Fragment extends Fragment {
         for(int i = 0; i< contactItems.size() ; i++){
 
             ContactItem ci = contactItems.get(i);
-            adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.iconuser), ci.getUser_name(), ci.getUser_phNumber(),
+            adapter.addItem(iconuser, ci.getUser_name(), ci.getUser_phNumber(),
                     ci.getMail(), ci.getAddress());
 
         }
