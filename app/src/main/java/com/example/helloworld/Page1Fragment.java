@@ -213,7 +213,7 @@ public class Page1Fragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
 
                             String name = edt.getText().toString();
-                            int[] index = new int[1000];
+                            int[] index = new int[10000];
                             int count=0;
                             //edt.setText("Helloworld");
 

@@ -96,6 +96,13 @@ public class Page2Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.page2, null);
 
+        img.clear();
+        try {
+            ((MainActivity) getContext()).getGallery();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         adapter = new MyGridAdapter(
                 getActivity().getApplicationContext(),
                 R.layout.dialog,       // GridView 항목의 레이아웃 row.xml

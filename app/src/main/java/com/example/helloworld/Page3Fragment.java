@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -77,8 +78,8 @@ public class Page3Fragment extends Fragment {
                 "Electrical Engineering", "School of Computing", "Chemistry", "Aerospace Engineering" };
 
         Spinner spiner = (Spinner) view.findViewById(R.id.spinner1);
-        ArrayAdapter<String> spinadapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,dep_name_for_spinner);
-        spinadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> spinadapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item,dep_name_for_spinner);
+        spinadapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spiner.setAdapter(spinadapter);
 
         //
@@ -90,11 +91,17 @@ public class Page3Fragment extends Fragment {
         button1.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),DepartmentActivity.class);
-                intent.putExtra("position", check_pos_for_button);
-                intent.putExtra("dep_icon",dep_icon);
-                intent.putExtra("dep_name",dep_name);
-                startActivity(intent);
+                if(check_pos_for_button<0){
+                    Toast.makeText(getContext(), "Please choose an appropriate department", Toast.LENGTH_LONG);
+                }
+                else{
+                    Intent intent = new Intent(getActivity(),DepartmentActivity.class);
+                    intent.putExtra("position", check_pos_for_button);
+                    intent.putExtra("dep_icon",dep_icon);
+                    intent.putExtra("dep_name",dep_name);
+                    startActivity(intent);
+
+                }
             }
         });
 

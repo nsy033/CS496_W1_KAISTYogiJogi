@@ -51,11 +51,8 @@ public class MainActivity extends AppCompatActivity {
         iconuser = new BitmapDrawable(getResources(), resized);
 
         //getContactList();
-        try {
-            getGallery();
-        }catch (Exception e) {
-            ;
-        }
+        //getGallery();
+
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
 
@@ -69,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private final int GET_GALLERY_IMAGE = 200;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
-    private void getGallery() throws IOException {
+    public void getGallery() throws IOException {
 
         Uri uri;
         Cursor cursor;

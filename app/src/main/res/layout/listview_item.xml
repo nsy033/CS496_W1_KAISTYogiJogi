@@ -33,7 +33,7 @@
             android:paddingTop="3dp"
             android:text="New Text"
             android:textColor="#53370D"
-            android:textSize="16dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/textView2"
@@ -44,7 +44,7 @@
             android:paddingBottom="10dp"
             android:text="New Text"
             android:textColor="#6E6557"
-            android:textSize="13dp" />
+            android:textSize="12dp" />
 
     </LinearLayout>
 

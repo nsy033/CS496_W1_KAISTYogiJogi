@@ -113,12 +113,18 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
 
 
         //view에 데이터 입력.
-        tv_dep_name.setText("학과이름 : " + departmentList.get(position).getDep_name());
-        tv_building_num.setText("건물이름 : " + departmentList.get(position).getDep_num());
-        tv_king_phone_number.setText("학과장 Tel : " +departmentList.get(position).getDep_king_phone());
-        tv_king_email.setText("학과장 E-mail : " + departmentList.get(position).getDep_king_email());
-        tv_admin_phone_number.setText("행정팀 Tel : "+ departmentList.get(position).getDep_admin_phone());
-        tv_admin_email.setText("행정팀 E-mail : "+departmentList.get(position).getDep_admin_email());
+        tv_dep_name
+                .setText(departmentList.get(position).getDep_name());
+        tv_building_num
+                .setText(departmentList.get(position).getDep_num());
+        tv_king_phone_number
+                .setText(departmentList.get(position).getDep_king_phone());
+        tv_king_email
+                .setText(departmentList.get(position).getDep_king_email());
+        tv_admin_phone_number
+                .setText(departmentList.get(position).getDep_admin_phone());
+        tv_admin_email
+                .setText(departmentList.get(position).getDep_admin_email());
 
         /**
          * to use google maps
