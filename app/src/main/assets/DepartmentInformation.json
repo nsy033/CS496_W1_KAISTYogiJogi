@@ -1,0 +1,179 @@
+{ "DepartmentInformation" : [
+  {
+    "dep_name" : "건설환경공학과",
+    "dep_building_num" : "KAIST 응용과학동(W1)",
+    "dep_k_phone_number" : "042-350-3621",
+    "dep_k_email" : "khg@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-3605",
+    "dep_a_email" : "abcs@kaist.ac.kr",
+    "dep_url" : "https://civil.kaist.ac.kr/",
+    "dep_latitude" : "36.36568",
+    "dep_longitude": "127.36127"
+  },
+  {
+    "dep_name" : "기술경영학과",
+    "dep_building_num" : "KAIST 동문창업관(N22)",
+    "dep_k_phone_number" : "042-350-6311",
+    "dep_k_email" : "joezo@kaist.edu",
+    "dep_a_phone_number" : "042-350-6302",
+    "dep_a_email" : "jyleeb@kaist.ac.kr",
+    "dep_url" : "https://btm.kaist.ac.kr/",
+    "dep_latitude" : "36.37497",
+    "dep_longitude": "127.36419"
+  },
+  {
+    "dep_name" : "기계공학과",
+    "dep_building_num" : "KAIST 기계공학동(N7)",
+    "dep_k_phone_number" : "042-350-3229",
+    "dep_k_email" : "leedy@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-3205",
+    "dep_a_email" : "erica4731@kaist.ac.kr",
+    "dep_url" : "https://me.kaist.ac.kr/main/main.html",
+    "dep_latitude" : "36.37247",
+    "dep_longitude": "127.35863"
+  },
+  {
+    "dep_name" : "물리학과",
+    "dep_building_num" : "KAIST 자연과학동(E6)",
+    "dep_k_phone_number" : "042-350-2546",
+    "dep_k_email" : "jwahn@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-2599",
+    "dep_a_email" : "e_lss@kaist.ac.kr",
+    "dep_url" : "https://physics.kaist.ac.kr/",
+    "dep_latitude" : "36.37005",
+    "dep_longitude": "127.36463"
+  },
+  {
+    "dep_name" : "바이오및뇌공학과",
+    "dep_building_num" : "KAIST 정문술 빌딩(E16)",
+    "dep_k_phone_number" : "042-350-4323",
+    "dep_k_email" : "kjeong@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-4306",
+    "dep_a_email" : "insoo@kaist.ac.kr",
+    "dep_url" : "https://bioeng.kaist.ac.kr/",
+    "dep_latitude" : "36.37167",
+    "dep_longitude": "127.36204"
+  },
+  {
+    "dep_name" : "산업및시스템공학과",
+    "dep_building_num" : "KAIST 산업경영학동(E2)",
+    "dep_k_phone_number" : "042-350-3126",
+    "dep_k_email" : "taesik.lee@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-3104",
+    "dep_a_email" : "yoojinhong@kaist.ac.kr",
+    "dep_url" : "https://ie.kaist.ac.kr/",
+    "dep_latitude" : "36.36755",
+    "dep_longitude": "127.36444"
+  },
+  {
+    "dep_name" : "생명과학과",
+    "dep_building_num" : "KAIST 자연과학동(E6)",
+    "dep_k_phone_number" : "042-350-2639",
+    "dep_k_email" : "daesoo@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-2603",
+    "dep_a_email" : "eihwapark@kaist.ac.kr",
+    "dep_url" : "https://bio.kaist.ac.kr/",
+    "dep_latitude" : "36.37005",
+    "dep_longitude": "127.36463"
+  },
+  {
+    "dep_name" : "생명화학공학과",
+    "dep_building_num" : "KAIST 응용과학동(W1)",
+    "dep_k_phone_number" : "042-350-3930",
+    "dep_k_email" : "leesy@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-3903",
+    "dep_a_email" : "cjh17@kaist.ac.kr",
+    "dep_url" : "https://cbe.kaist.ac.kr/",
+    "dep_latitude" : "36.36568",
+    "dep_longitude": "127.36127"
+  },
+  {
+    "dep_name" : "산업디자인학과",
+    "dep_building_num" : "KAIST 산업디자인학과동(N25)",
+    "dep_k_phone_number" : "042-350-4518",
+    "dep_k_email" : "tjnam@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-4503",
+    "dep_a_email" : "sesedolee@kaist.ac.kr",
+    "dep_url" : "https://id.kaist.ac.kr/",
+    "dep_latitude" : "36.37389",
+    "dep_longitude": "127.36210"
+  },
+  {
+    "dep_name" : "수리과학과",
+    "dep_building_num" : "KAIST 자연과학동(E6)",
+    "dep_k_phone_number" : "042-350-7308",
+    "dep_k_email" : "ynlee@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-2702",
+    "dep_a_email" : "qskim14@kaist.ac.kr",
+    "dep_url" : "https://mathsci.kaist.ac.kr/home/",
+    "dep_latitude" : "36.37005",
+    "dep_longitude": "127.36463"
+  },
+  {
+    "dep_name" : "신소재공학과",
+    "dep_building_num" : "KAIST 응용과학동(W1)",
+    "dep_k_phone_number" : "042-350-3340",
+    "dep_k_email" : "parkcb@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-3308",
+    "dep_a_email" : "yise@kaist.ac.kr",
+    "dep_url" : "https://mse.kaist.ac.kr/",
+    "dep_latitude" : "36.36568",
+    "dep_longitude": "127.36127"
+  },
+  {
+    "dep_name" : "원자력및양자공학과",
+    "dep_building_num" : "KAIST 기계공학동(N7)",
+    "dep_k_phone_number" : "042-350-3822",
+    "dep_k_email" : "sungmin@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-3802",
+    "dep_a_email" : "e_santafe@kaist.ac.kr",
+    "dep_url" : "https://nuclear.kaist.ac.kr/",
+    "dep_latitude" : "36.37247",
+    "dep_longitude": "127.35863"
+  },
+  {
+    "dep_name" : "전기및전자공학과",
+    "dep_building_num" : "KAIST 정보전자공학동(E3)",
+    "dep_k_phone_number" : "042-350-7422",
+    "dep_k_email" : "jkang@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-3404",
+    "dep_a_email" : "myfriend@kaist.ac.kr",
+    "dep_url" : "https://ee.kaist.ac.kr/",
+    "dep_latitude" : "36.36905",
+    "dep_longitude": "127.36523"
+  },
+  {
+    "dep_name" : "전산학과",
+    "dep_building_num" : "KAIST 김병호김상열IT융합빌딩(N1)",
+    "dep_k_phone_number" : "042-350-3530",
+    "dep_k_email" : "mhkim@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-3505",
+    "dep_a_email" : "topcheol@kaist.ac.kr",
+    "dep_url" : "https://cs.kaist.ac.kr/",
+    "dep_latitude" : "36.37433",
+    "dep_longitude": "127.36569"
+  },
+  {
+    "dep_name" : "화학과",
+    "dep_building_num" : "KAIST 자연과학동(E6)",
+    "dep_k_phone_number" : "042-350-2830",
+    "dep_k_email" : "rryoo@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-2899",
+    "dep_a_email" : "park-Jungho@kaist.ac.kr",
+    "dep_url" : "https://chem.kaist.ac.kr/main/",
+    "dep_latitude" : "36.37005",
+    "dep_longitude": "127.36463"
+  },
+  {
+    "dep_name" : "항공우주공학과",
+    "dep_building_num" : "KAIST 기계공학동(N7)",
+    "dep_k_phone_number" : "042-350-3723",
+    "dep_k_email" : "jaehunghan@kaist.ac.kr",
+    "dep_a_phone_number" : "042-350-3705",
+    "dep_a_email" : "iknow@kaist.ac.kr",
+    "dep_url" : "https://ae.kaist.ac.kr/",
+    "dep_latitude" : "36.37247",
+    "dep_longitude": "127.35863"
+  }
+]
+}

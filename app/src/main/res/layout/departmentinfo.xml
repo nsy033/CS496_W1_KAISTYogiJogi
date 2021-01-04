@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".DepartmentActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/layout_dep"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingTop="15dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:id="@+id/dep_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="학과 정보"
+                    android:textColor="#1B1B1B"
+                    android:textSize="24sp"></TextView>
+                <!-- fragment에서 하는법
+        <com.google.android.gms.maps.MapView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+        -->
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/customborder"
+                    tools:context=".MapsActivity">></fragment>
+
+                <TextView
+                    android:id="@+id/dep_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="New Text"
+                    android:textColor="#1B1B1B"></TextView>
+
+                <TextView
+                    android:id="@+id/building_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="New Text"
+                    android:textColor="#1B1B1B"></TextView>
+
+                <TextView
+                    android:id="@+id/king_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="New Text"
+                    android:textColor="#1B1B1B"></TextView>
+
+                <TextView
+                    android:id="@+id/king_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="New Text"
+                    android:textColor="#1B1B1B"></TextView>
+
+                <TextView
+                    android:id="@+id/admin_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="New Text"
+                    android:textColor="#1B1B1B"></TextView>
+
+                <TextView
+                    android:id="@+id/admin_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="New Text"
+                    android:textColor="#1B1B1B"></TextView>
+
+                <Button
+                    android:id="@+id/button_go_web"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="학과 홈페이지 바로가기" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
