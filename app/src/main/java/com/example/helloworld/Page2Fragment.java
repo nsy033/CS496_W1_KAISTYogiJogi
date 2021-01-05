@@ -107,6 +107,13 @@ public class Page2Fragment extends Fragment {
          }
 
 
+        img.clear();
+        try {
+            ((MainActivity) getContext()).getGallery();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         adapter = new MyGridAdapter(
                 getActivity().getApplicationContext(),
                 R.layout.dialog,       // GridView 항목의 레이아웃 row.xml
@@ -180,6 +187,7 @@ public class Page2Fragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     showDialog(pos, view);
+                    adapter.notifyDataSetChanged();
                 }
             });
 
@@ -206,13 +214,14 @@ public class Page2Fragment extends Fragment {
 
                                     adapter.notifyDataSetChanged();
 
-                           }
-                    })
-                    .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
+                                }
+                            })
+                            .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
 
                     AlertDialog finalDialog = adb.create();
                     finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -235,10 +244,10 @@ public class Page2Fragment extends Fragment {
     Button btn_photo;
     ImageView iv_photo;
 
-    final static int TAKE_PICTURE = 1;
 
     String mCurrentPhotoPath;
     final static int REQUEST_TAKE_PHOTO = 1;
+    final static int REQUEST_CROP_PHOTO = 203;
 
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -364,6 +373,7 @@ public class Page2Fragment extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.pager_layout);
 
+
         List<PagerModel> pagerArr = new ArrayList<>();
 
         Display display = getActivity().getWindowManager().getDefaultDisplay();
@@ -378,11 +388,29 @@ public class Page2Fragment extends Fragment {
             pagerArr.add(new PagerModel(""+(i+1), "Pager Item #" + i, bitmap));
         }
 
-        TestPagerAdapter adapter = new TestPagerAdapter(getContext(), pagerArr);
+        TestPagerAdapter adapter2 = new TestPagerAdapter(getContext(), pagerArr);
         ViewPager pager = (ViewPager) dialog.findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+        pager.setAdapter(adapter2);
         //pager.setPageTransformer(true, new ZoomOutPageTransformer());
         pager.setCurrentItem(position);
+        Button button1 = (Button) dialog.findViewById(R.id.cropbutton); //crop
+        button1.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CropActivity.class);
+                intent.putExtra("path", img.get(pager.getCurrentItem()).getPath());
+
+                startActivityForResult(intent, REQUEST_CROP_PHOTO);
+                adapter.notifyDataSetChanged();
+                dialog.dismiss();
+                adapter.notifyDataSetChanged();
+            }
+        });
+        Button button2 = (Button) dialog.findViewById(R.id.cancelbutton); //cancel
+        button2.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
         dialog.show();
 

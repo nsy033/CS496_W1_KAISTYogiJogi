@@ -9,12 +9,17 @@ import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,18 +31,23 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.example.helloworld.Page3Fragment.dep_icon;
+import static com.example.helloworld.Page3Fragment.dep_name;
+
+
 public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private long time = 0;
     public static Context context_main;
-    public static Drawable iconuser;
+    public static Bitmap[] sized = new Bitmap[6];
+    public static int[] forsized = {R.drawable.iconuser, R.drawable.iconhome, R.drawable.iconsearch, R.drawable.iconadd, R.drawable.go, R.drawable.web};
 
     //static ArrayList<Contact> contactList = new ArrayList<Contact>();
     static ArrayList<ContactItem> contactItems = new ArrayList<ContactItem>();
     static ArrayList<GalleryImage> img = new ArrayList<>();
-
+    static ArrayList<GridViewItemKaist> kaist = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -46,26 +56,76 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context_main = this;
 
-        Bitmap tmpb = BitmapFactory.decodeResource(getResources(), R.drawable.iconuser);
-        int w = tmpb.getWidth();
-        int h = tmpb.getHeight();
-        Bitmap resized = Bitmap.createScaledBitmap( tmpb, w/10, h/10, true );
-        iconuser = new BitmapDrawable(getResources(), resized);
+        for(int i=0;i<6;i++){
+            Bitmap tmpb = BitmapFactory.decodeResource(getResources(), forsized[i]);
+            int w = tmpb.getWidth();
+            int h = tmpb.getHeight();
+            Bitmap sd = Bitmap.createScaledBitmap( tmpb, w/15, h/15, true );
+            sized[i] = sd;
+        }
+
+        for(int i=0; i<dep_icon.length;i++) {
+
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), dep_icon[i]);
+            int width = bitmap.getWidth();
+            int height = bitmap.getHeight();
+            Bitmap resize = Bitmap.createScaledBitmap(bitmap, width / 10, height / 10, true);
+
+            GridViewItemKaist gk = new GridViewItemKaist();
+            gk.setIcon(new BitmapDrawable(getResources(), resize));
+            gk.setStr(dep_name[i]);
+            kaist.add(gk);
+        }
 
         //getContactList();
         //getGallery();
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
+        tabLayout.setSelectedTabIndicatorHeight(0);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(viewPagerAdapter);
 
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            if (tab != null) {
+                TextView tabTextView = new TextView(this);
+                tab.setCustomView(tabTextView);
+                tabTextView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                tabTextView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                tabTextView.setText(tab.getText());
+                tabTextView.setTextSize((float) 12.5);
+                // First tab is the selected tab, so if i==0 then set BOLD typeface
+                if (i == 0) {
+                    tabTextView.setTypeface(null, Typeface.BOLD);
+                    tabTextView.setTextColor(Color.parseColor("#655B3E"));
+                }
+            }
+        }
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                TextView text = (TextView) tab.getCustomView();
+                text.setTypeface(null, Typeface.BOLD);
+                text.setTextColor(Color.parseColor("#655B3E"));
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                TextView text = (TextView) tab.getCustomView();
+                text.setTypeface(null, Typeface.NORMAL);
+                text.setTextColor(Color.parseColor("#9C9788"));
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
     }
-
-    private final int GET_GALLERY_IMAGE = 200;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     public void getGallery() throws IOException {
@@ -220,5 +280,4 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
         return contactItems;
     }
-
 }

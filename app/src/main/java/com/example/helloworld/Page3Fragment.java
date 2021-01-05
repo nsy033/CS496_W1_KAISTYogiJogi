@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import org.json.JSONArray;
@@ -22,6 +22,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import static com.example.helloworld.MainActivity.kaist;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,12 +43,14 @@ public class Page3Fragment extends Fragment {
     public static String dep_name[] = {  "CEE", "BTM", "ME", "PH", "BBE",
             "ISE", "BS", "CBE", "ID", "MS",
             "MSE", "NQE", "EE", "CS", "CH", "AE" };
+
     //Spinner adapter
     public static String dep_name_for_spinner[] = { " - Choose Department - ", "Civil and Environmental Engineering", "Business Technological Management",
             "Mechanical Engineering", "Physics", "Bio and Brain Engineering",
             "Industrial and Systemic Engineering", "Biological Sciences", "Chemical and Biomolecular Engineering", "Industrial Design",
             "Mathematical Sciences", "Materials Science and Engineering", "Nuclear and Quantum Engineering",
             "Electrical Engineering", "School of Computing", "Chemistry", "Aerospace Engineering" };
+
 
     public Page3Fragment() { }
 
@@ -72,33 +76,32 @@ public class Page3Fragment extends Fragment {
         gridview.setAdapter(adapter);
         adapter = add_item_to_gridviewadapter(adapter);
 
-
         Spinner spiner = (Spinner) view.findViewById(R.id.spinner1);
-        ArrayAdapter<String> spinadapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,dep_name_for_spinner);
-        spinadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> spinadapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item,dep_name_for_spinner);
+        spinadapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spiner.setAdapter(spinadapter);
 
         //
         //Button Control, Listener
         //
         ImageButton button1 = (ImageButton) view.findViewById(R.id.button_go_dep);
+        button1.setImageBitmap(MainActivity.sized[4]);
         button1.setScaleType(ImageButton.ScaleType.FIT_CENTER);
 
         button1.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),DepartmentActivity.class);
-                intent.putExtra("position", check_pos_for_button);
-                intent.putExtra("dep_icon",dep_icon);
-                intent.putExtra("dep_name",dep_name);
-                startActivity(intent);
-                /**
-                 Fragment newFragment = new DepartmentActivity(check_pos_for_button, dep_icon, dep_name, childFragmentItemList);
-                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                 transaction.replace(R.id.parent_id, newFragment);
-                 transaction.addToBackStack(null);
-                 transaction.commit();
-                 */
+                if(check_pos_for_button<0){
+                    Toast.makeText(getContext(), "Please choose an appropriate department", Toast.LENGTH_LONG);
+                }
+                else{
+                    Intent intent = new Intent(getActivity(),DepartmentActivity.class);
+                    intent.putExtra("position", check_pos_for_button);
+                    intent.putExtra("dep_icon",dep_icon);
+                    intent.putExtra("dep_name",dep_name);
+                    startActivity(intent);
+
+                }
             }
         });
 
@@ -113,13 +116,6 @@ public class Page3Fragment extends Fragment {
                 intent.putExtra("dep_icon",dep_icon);
                 intent.putExtra("dep_name",dep_name);
                 startActivity(intent);
-                /**
-                 Fragment newFragment = new DepartmentActivity(position, dep_icon, dep_name, childFragmentItemList);
-                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                 transaction.replace(R.id.parent_id, newFragment);
-                 transaction.addToBackStack(null);
-                 transaction.commit();
-                 */
             }
         });
 
@@ -146,9 +142,9 @@ public class Page3Fragment extends Fragment {
         json = getJsonString("DepartmentInformation.json");
         jsonParsing(json); // arraylist<childfragmentitem> 에 들어가게 됨.
 
-
         for(int i=0; i<dep_icon.length;i++){
-            myadapter.addItem(ContextCompat.getDrawable(getActivity(), dep_icon[i]), dep_name[i]); //건설환경공학과
+            GridViewItemKaist gk = kaist.get(i);
+            myadapter.addItem(gk.getIcon(), gk.getStr()); //건설환경공학과
         }
 
         return myadapter;

@@ -19,6 +19,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,14 +28,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -124,7 +123,6 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
 
 
 
-        //view에 데이터 입력.
         tv_dep_info
                   .setText("   " +Page3Fragment.dep_name_for_spinner[position+1]+ "   ");
         //        .setText("   " + departmentList.get(position).getDep_name()+ "   ");
@@ -175,7 +173,9 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
 
         //WebView 구현과 button 구현
         //Button을 눌렀을 때 web이 뜰 수 있게 해주기 위함.
-        Button button1 = (Button) findViewById(R.id.button_go_web);
+        ImageButton button1 = (ImageButton) findViewById(R.id.button_go_web);
+        button1.setImageBitmap(MainActivity.sized[5]);
+        button1.setScaleType(ImageButton.ScaleType.FIT_CENTER);
 
         button1.setOnClickListener(new Button.OnClickListener() {
             @Override

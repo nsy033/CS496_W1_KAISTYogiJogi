@@ -19,6 +19,13 @@
     <style name = "MyDialogTheme" parent = "Theme.AppCompat.Light.Dialog.Alert">
     </style>
     <style name = "tab_text" parent = "TextAppearance.Design.Tab">
-        <item name="android:textSize"> 12sp</item>
+        <item name="android:textSize"> 12dp</item>
+        <item name="android:capitalize"> characters</item>
+        <item name="android:textColor"> #9C9788</item>
     </style>
+
+    <style name="Base.Widget.Design.TabLayout" parent="android:Widget">
+        <item name="tabBackground">@drawable/tab_background</item>
+    </style>
+
 </resources>

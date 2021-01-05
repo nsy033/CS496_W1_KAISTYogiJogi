@@ -25,20 +25,21 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="#8A7C52"
-        app:tabRippleColor="#FFFFFF"
+        app:tabIndicatorColor="#655B3E"
+        android:elevation = "4dp"
         app:tabTextAppearance="@style/tab_text"
-        app:tabTextColor="#706B6B">
+        app:tabTextColor="#9C9788">
+
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Contacts" />
+            android:text="CONTACTS" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Photos" />
+            android:text="PHOTOS" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"

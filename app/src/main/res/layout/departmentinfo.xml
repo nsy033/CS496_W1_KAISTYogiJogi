@@ -14,7 +14,6 @@
         android:background="#FFFFFF"
         android:orientation="vertical">
 
-
         <!-- fragment에서 하는법
         <com.google.android.gms.maps.MapView
             android:layout_width="match_parent"
@@ -286,18 +285,17 @@
                     android:textColor="#53370D"></TextView>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/button_go_web"
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:backgroundTint="@color/white"
-                android:backgroundTintMode="screen"
-                android:text="Go to the Homepage"
-                android:textColor="#969696"
-                app:iconTint="#FBEAEA" />
-
             <!-- android:background="@drawable/buttonstyle" -->
         </LinearLayout>
     </com.google.android.material.circularreveal.CircularRevealFrameLayout>
+
+    <ImageButton
+        android:id="@+id/button_go_web"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="14dp"
+        android:layout_marginRight="12dp"
+        android:background="@android:color/transparent" />
 
 </FrameLayout>
