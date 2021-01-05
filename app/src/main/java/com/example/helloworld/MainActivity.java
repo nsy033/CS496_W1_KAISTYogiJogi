@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
     }
-
     @RequiresApi(api = Build.VERSION_CODES.P)
     public void getGallery() throws IOException {
 

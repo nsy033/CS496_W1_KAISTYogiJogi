@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import static com.example.helloworld.MainActivity.img;
 import static com.example.helloworld.Page2Fragment.REQUEST_CROP_PHOTO;
+import static com.example.helloworld.Page2Fragment.adapter;
 
 public class CropActivity extends AppCompatActivity {
 
@@ -49,56 +50,59 @@ public class CropActivity extends AppCompatActivity {
 
                 if (resultCode == RESULT_OK) {
                     resultUri = result.getUri();
-                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+
+                    String absolutePathOfImage = null;
+                    String path = "";
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), resultUri);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap, null, null);
+
+                    Uri uri;
+                    Cursor cursor;
+                    int column_index_data, column_index_folder_name;
+                    uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+
+                    String[] projection = {MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME};
+                    cursor = this.getContentResolver().query(uri, projection, null, null, null);
+
+                    column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+                    column_index_folder_name = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
+                    while (cursor.moveToNext()) {
+                        absolutePathOfImage = cursor.getString(column_index_data);
+                        File files = new File(absolutePathOfImage);
+
+                        Bitmap myBitmap = BitmapFactory.decodeFile(files.getAbsolutePath());
+                        GalleryImage gi = new GalleryImage();
+
+                        int w = myBitmap.getWidth();
+                        int h = myBitmap.getHeight();
+                        Bitmap resized = Bitmap.createScaledBitmap(myBitmap, w / 5, h / 5, true);
+
+                        gi.setRd(resized);
+                        gi.setD(myBitmap);
+                        gi.setPath(absolutePathOfImage);
+                        boolean flag = true;
+                        for (int i = 0; i < img.size(); i++) {
+                            if (img.get(i).getPath().equals(gi.getPath())) {
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if (flag) {
+                            img.add(gi);
+                            adapter.notifyDataSetChanged();
+                        }
+
+                    }
+                }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                     Exception error = result.getError();
                 }
 
-                String absolutePathOfImage = null;
-                String path = "";
-                Bitmap bitmap = null;
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), resultUri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap, null, null);
 
-                Uri uri;
-                Cursor cursor;
-                int column_index_data, column_index_folder_name;
-                uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-
-                String[] projection = {MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME};
-                cursor = this.getContentResolver().query(uri, projection, null, null, null);
-
-                column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-                column_index_folder_name = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
-                while (cursor.moveToNext()) {
-                    absolutePathOfImage = cursor.getString(column_index_data);
-                    File files = new File(absolutePathOfImage);
-
-                    Bitmap myBitmap = BitmapFactory.decodeFile(files.getAbsolutePath());
-                    GalleryImage gi = new GalleryImage();
-
-                    int w = myBitmap.getWidth();
-                    int h = myBitmap.getHeight();
-                    Bitmap resized = Bitmap.createScaledBitmap(myBitmap, w / 5, h / 5, true);
-
-                    gi.setRd(resized);
-                    gi.setD(myBitmap);
-                    gi.setPath(absolutePathOfImage);
-                    boolean flag = true;
-                    for (int i = 0; i < img.size(); i++) {
-                        if (img.get(i).getPath().equals(gi.getPath())) {
-                            flag = false;
-                            break;
-                        }
-                    }
-                    if (flag) {
-                        img.add(gi);
-                    }
-
-                }
         }
 
         finish();

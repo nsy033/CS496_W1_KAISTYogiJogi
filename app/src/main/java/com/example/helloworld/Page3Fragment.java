@@ -35,16 +35,25 @@ public class Page3Fragment extends Fragment {
     public static ArrayList<DepartmentItem> departmentItemList = new ArrayList<DepartmentItem>();
     public static int check_pos_for_button = 0;
 
-    public static int dep_icon[] = { R.drawable.civil ,R.drawable.business,R.drawable.mechanic,R.drawable.physics,
-            R.drawable.brain,R.drawable.system,R.drawable.bio,R.drawable.biochem,
-            R.drawable.design,R.drawable.math,R.drawable.material,R.drawable.nuclear,
-            R.drawable.electric,R.drawable.computer,R.drawable.chem,R.drawable.aerospace};
+    public static int dep_icon[] = {R.drawable.civil, R.drawable.business, R.drawable.mechanic, R.drawable.physics,
+            R.drawable.brain, R.drawable.system, R.drawable.bio, R.drawable.biochem,
+            R.drawable.design, R.drawable.math, R.drawable.material, R.drawable.nuclear,
+            R.drawable.electric, R.drawable.computer, R.drawable.chem, R.drawable.aerospace};
 
-    public static String dep_name[] = {  "CEE", "BTM", "ME", "PH", "BBE",
+    public static String dep_name[] = {"CEE", "BTM", "ME", "PH", "BBE",
             "ISE", "BS", "CBE", "ID", "MS",
-            "MSE", "NQE", "EE", "CS", "CH", "AE" };
+            "MSE", "NQE", "EE", "CS", "CH", "AE"};
 
-    public Page3Fragment() { }
+    //Spinner adapter
+    public static String dep_name_for_spinner[] = {" - Choose Department - ", "Civil and Environmental Engineering", "Business Technology Management",
+            "Mechanical Engineering", "Physics", "Bio and Brain Engineering",
+            "Industrial and Systems Engineering", "Biological Sciences", "Chemical and Biomolecular Engineering", "Industrial Design",
+            "Mathematical Sciences", "Materials Science and Engineering", "Nuclear and Quantum Engineering",
+            "Electrical Engineering", "School of Computing", "Chemistry", "Aerospace Engineering"};
+
+
+    public Page3Fragment() {
+    }
 
     // TODO: Rename and change types and number of parameters
     public static Page3Fragment newInstance() {
@@ -60,7 +69,7 @@ public class Page3Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.page3, null) ;
+        View view = inflater.inflate(R.layout.page3, null);
 
         //GridView adapter
         GridViewAdapterForKaist adapter = new GridViewAdapterForKaist();
@@ -68,15 +77,8 @@ public class Page3Fragment extends Fragment {
         gridview.setAdapter(adapter);
         adapter = add_item_to_gridviewadapter(adapter);
 
-        //Spinner adapter
-        String dep_name_for_spinner[] = { " - Choose Department - ", "Civil and Environmental Engineering", "Business Technology Management",
-                "Mechanical Engineering", "Physics", "Bio and Brain Engineering",
-                "Industrial and Systems Engineering", "Biological Sciences", "Chemical and Biomolecular Engineering", "Industrial Design",
-                "Mathematical Sciences", "Materials Science and Engineering", "Nuclear and Quantum Engineering",
-                "Electrical Engineering", "School of Computing", "Chemistry", "Aerospace Engineering" };
-
         Spinner spiner = (Spinner) view.findViewById(R.id.spinner1);
-        ArrayAdapter<String> spinadapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_item,dep_name_for_spinner);
+        ArrayAdapter<String> spinadapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, dep_name_for_spinner);
         spinadapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spiner.setAdapter(spinadapter);
 
@@ -90,14 +92,13 @@ public class Page3Fragment extends Fragment {
         button1.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(check_pos_for_button<0){
+                if (check_pos_for_button < 0) {
                     Toast.makeText(getContext(), "Please choose an appropriate department", Toast.LENGTH_LONG);
-                }
-                else{
-                    Intent intent = new Intent(getActivity(),DepartmentActivity.class);
+                } else {
+                    Intent intent = new Intent(getActivity(), DepartmentActivity.class);
                     intent.putExtra("position", check_pos_for_button);
-                    intent.putExtra("dep_icon",dep_icon);
-                    intent.putExtra("dep_name",dep_name);
+                    intent.putExtra("dep_icon", dep_icon);
+                    intent.putExtra("dep_name", dep_name);
                     startActivity(intent);
 
                 }
@@ -109,11 +110,11 @@ public class Page3Fragment extends Fragment {
         //
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                Intent intent = new Intent(getActivity(),DepartmentActivity.class);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), DepartmentActivity.class);
                 intent.putExtra("position", position);
-                intent.putExtra("dep_icon",dep_icon);
-                intent.putExtra("dep_name",dep_name);
+                intent.putExtra("dep_icon", dep_icon);
+                intent.putExtra("dep_name", dep_name);
                 startActivity(intent);
             }
         });
@@ -125,24 +126,24 @@ public class Page3Fragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getActivity().getApplicationContext(), "selected department : " + dep_name[position],Toast.LENGTH_SHORT).show();
-                check_pos_for_button = position-1;
+                check_pos_for_button = position - 1;
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
 
-
-        return view ;
+        return view;
     }
 
-    public GridViewAdapterForKaist add_item_to_gridviewadapter(GridViewAdapterForKaist myadapter){
+    public GridViewAdapterForKaist add_item_to_gridviewadapter(GridViewAdapterForKaist myadapter) {
         String json = "";
         json = getJsonString("DepartmentInformation.json");
         jsonParsing(json); // arraylist<childfragmentitem> 에 들어가게 됨.
 
-        for(int i=0; i<dep_icon.length;i++){
+        for (int i = 0; i < dep_icon.length; i++) {
             GridViewItemKaist gk = kaist.get(i);
             myadapter.addItem(gk.getIcon(), gk.getStr()); //건설환경공학과
         }
@@ -151,8 +152,7 @@ public class Page3Fragment extends Fragment {
     }
 
 
-    public String getJsonString(String filename)
-    {
+    public String getJsonString(String filename) {
         String json = "";
 
         try {
@@ -164,9 +164,7 @@ public class Page3Fragment extends Fragment {
             is.close();
 
             json = new String(buffer, "UTF-8");
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
 
@@ -174,15 +172,13 @@ public class Page3Fragment extends Fragment {
     }
 
 
-    public void jsonParsing(String json)
-    {
-        try{
+    public void jsonParsing(String json) {
+        try {
             JSONObject jsonObject = new JSONObject(json);
 
             JSONArray contentArray = jsonObject.getJSONArray("DepartmentInformation");
 
-            for(int i=0; i<contentArray.length(); i++)
-            {
+            for (int i = 0; i < contentArray.length(); i++) {
                 JSONObject contentObject = contentArray.getJSONObject(i);
 
                 DepartmentItem depinfo = new DepartmentItem();
@@ -198,10 +194,9 @@ public class Page3Fragment extends Fragment {
                 depinfo.setDep_longitude(Double.parseDouble(contentObject.getString("dep_longitude")));
                 departmentItemList.add(depinfo);
             }
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
-
 }

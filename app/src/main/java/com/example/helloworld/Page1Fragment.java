@@ -182,7 +182,7 @@ public class Page1Fragment extends Fragment {
                                 dialog.dismiss();
                             }
                         })
-                        .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -250,7 +250,7 @@ public class Page1Fragment extends Fragment {
                                 dialog.dismiss();
                             }
                         })
-                        .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
