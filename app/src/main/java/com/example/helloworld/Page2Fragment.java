@@ -99,10 +99,6 @@ public class Page2Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.page2, null);
-
-<<<<<<< Updated upstream
-=======
-
          img.clear();
          try {
             ((MainActivity) getContext()).getGallery();
@@ -111,7 +107,6 @@ public class Page2Fragment extends Fragment {
          }
 
 
->>>>>>> Stashed changes
         adapter = new MyGridAdapter(
                 getActivity().getApplicationContext(),
                 R.layout.dialog,       // GridView 항목의 레이아웃 row.xml
@@ -211,16 +206,6 @@ public class Page2Fragment extends Fragment {
 
                                     adapter.notifyDataSetChanged();
 
-<<<<<<< Updated upstream
-                                }
-                            })
-                            .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            });
-=======
                            }
                     })
                     .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -228,7 +213,7 @@ public class Page2Fragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     });
->>>>>>> Stashed changes
+
                     AlertDialog finalDialog = adb.create();
                     finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                         @Override

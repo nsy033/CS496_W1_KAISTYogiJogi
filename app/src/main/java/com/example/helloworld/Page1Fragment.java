@@ -217,11 +217,9 @@ public class Page1Fragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 String name = edt.getText().toString();
-<<<<<<< Updated upstream
-                                int[] index = new int[1000];
-=======
+
                                 int[] index = new int[10000];
->>>>>>> Stashed changes
+
                                 int count=0;
                                 //edt.setText("Helloworld");
 

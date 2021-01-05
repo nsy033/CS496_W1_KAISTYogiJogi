@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import androidx.core.content.ContextCompat;
@@ -35,14 +36,8 @@ public class Page3Fragment extends Fragment {
     public static int dep_icon[] = { R.drawable.civil ,R.drawable.business,R.drawable.mechanic,R.drawable.physics,
             R.drawable.brain,R.drawable.system,R.drawable.bio,R.drawable.biochem,
             R.drawable.design,R.drawable.math,R.drawable.material,R.drawable.nuclear,
-            R.drawable.electrical,R.drawable.computer,R.drawable.chem,R.drawable.aerospace};
+            R.drawable.electric,R.drawable.computer,R.drawable.chem,R.drawable.aerospace};
 
-<<<<<<< Updated upstream
-    public static String dep_name[] = {  "건설환경공학과", "기술경영학과", "기계공학과", "물리학과", "바이오 및\n뇌공학과",
-            "산업 및\n시스템공학과", "생명과학과", "생명화학공학과", "산업디자인학과", "수리과학과",
-            "신소재공학과", "원자력 및\n양자공학과", "전기 및\n전자공학과", "전산학과", "화학과", "항공우주공학과" };
-
-=======
     public static String dep_name[] = {  "CEE", "BTM", "ME", "PH", "BBE",
             "ISE", "BS", "CBE", "ID", "MS",
             "MSE", "NQE", "EE", "CS", "CH", "AE" };
@@ -52,7 +47,7 @@ public class Page3Fragment extends Fragment {
             "Industrial and Systemic Engineering", "Biological Sciences", "Chemical and Biomolecular Engineering", "Industrial Design",
             "Mathematical Sciences", "Materials Science and Engineering", "Nuclear and Quantum Engineering",
             "Electrical Engineering", "School of Computing", "Chemistry", "Aerospace Engineering" };
->>>>>>> Stashed changes
+
     public Page3Fragment() { }
 
     // TODO: Rename and change types and number of parameters
@@ -78,15 +73,6 @@ public class Page3Fragment extends Fragment {
         adapter = add_item_to_gridviewadapter(adapter);
 
 
-<<<<<<< Updated upstream
-        //Spinner adapter
-        String dep_name_for_spinner[] = { "-학과 선택-", "건설환경공학과", "기술경영학과", "기계공학과", "물리학과", "바이오 및\n뇌공학과",
-                "산업 및\n시스템공학과", "생명과학과", "생명화학공학과", "산업디자인학과", "수리과학과",
-                "신소재공학과", "원자력 및\n양자공학과", "전기 및\n전자공학과", "전산학과", "화학과", "항공우주공학과" };
-=======
-
->>>>>>> Stashed changes
-
         Spinner spiner = (Spinner) view.findViewById(R.id.spinner1);
         ArrayAdapter<String> spinadapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,dep_name_for_spinner);
         spinadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -95,7 +81,8 @@ public class Page3Fragment extends Fragment {
         //
         //Button Control, Listener
         //
-        Button button1 = (Button) view.findViewById(R.id.button_go_dep);
+        ImageButton button1 = (ImageButton) view.findViewById(R.id.button_go_dep);
+        button1.setScaleType(ImageButton.ScaleType.FIT_CENTER);
 
         button1.setOnClickListener(new Button.OnClickListener() {
             @Override
