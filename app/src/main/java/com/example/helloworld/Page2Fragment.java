@@ -9,9 +9,11 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.ImageDecoder;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -27,6 +29,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -90,12 +93,25 @@ public class Page2Fragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.page2, null);
 
+<<<<<<< Updated upstream
+=======
+
+         img.clear();
+         try {
+            ((MainActivity) getContext()).getGallery();
+         } catch (IOException e) {
+            e.printStackTrace();
+         }
+
+
+>>>>>>> Stashed changes
         adapter = new MyGridAdapter(
                 getActivity().getApplicationContext(),
                 R.layout.dialog,       // GridView 항목의 레이아웃 row.xml
@@ -168,7 +184,6 @@ public class Page2Fragment extends Fragment {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     showDialog(pos, view);
                 }
             });
@@ -196,6 +211,7 @@ public class Page2Fragment extends Fragment {
 
                                     adapter.notifyDataSetChanged();
 
+<<<<<<< Updated upstream
                                 }
                             })
                             .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -204,6 +220,15 @@ public class Page2Fragment extends Fragment {
 
                                 }
                             });
+=======
+                           }
+                    })
+                    .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+>>>>>>> Stashed changes
                     AlertDialog finalDialog = adb.create();
                     finalDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                         @Override
@@ -217,10 +242,8 @@ public class Page2Fragment extends Fragment {
                     return true;
                 }
             });
-
             return imageView;
         }
-
     }
 
     final private static String TAG = "태그명";
@@ -268,8 +291,16 @@ public class Page2Fragment extends Fragment {
                     if (resultCode == RESULT_OK) {
                         File file = new File(mCurrentPhotoPath);
                         Bitmap bitmap;
-
                         try {
+                            /**
+                            if (Build.VERSION.SDK_INT >= 29){
+                                ImageDecoder.Source source = ImageDecoder.createSource(getActivity().getContentResolver(),Uri.fromFile(file));
+                                bitmap = ImageDecoder.decodeBitmap(source);
+                            }
+                            else{
+                                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.fromFile(file));
+                            }
+                            */
                             bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.fromFile(file));
                             if (bitmap != null) {
                                 Matrix matrix = new Matrix();
@@ -292,31 +323,42 @@ public class Page2Fragment extends Fragment {
 
                                 column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
                                 column_index_folder_name = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
-                                while (cursor.moveToNext()) {
+
+                                int check = 0;
+                                while (cursor.moveToNext() && check<=31) {
                                     absolutePathOfImage = cursor.getString(column_index_data);
                                     File files = new File(absolutePathOfImage);
-
-                                    Bitmap myBitmap = BitmapFactory.decodeFile(files.getAbsolutePath());
+                                    Bitmap myBitmap = null;
+                                    if (Build.VERSION.SDK_INT >= 29){
+                                        ImageDecoder.Source source = ImageDecoder.createSource(getActivity().getContentResolver(),Uri.fromFile(files));
+                                        myBitmap = ImageDecoder.decodeBitmap(source);
+                                    }
+                                    else{
+                                        myBitmap = BitmapFactory.decodeFile(absolutePathOfImage);
+                                    }
+                                    //Bitmap myBitmap = BitmapFactory.decodeFile(files.getAbsolutePath());
                                     GalleryImage gi = new GalleryImage();
+                                    if(myBitmap != null) {
+                                        int w = myBitmap.getWidth();
+                                        int h = myBitmap.getHeight();
+                                        Bitmap resized = Bitmap.createScaledBitmap(myBitmap, w / 5, h / 5, true);
 
-                                    int w = myBitmap.getWidth();
-                                    int h = myBitmap.getHeight();
-                                    Bitmap resized = Bitmap.createScaledBitmap( myBitmap, w/5, h/5, true );
-
-                                    gi.setRd(resized);
-                                    gi.setD(myBitmap);
-                                    gi.setPath(absolutePathOfImage);
-                                    boolean flag = true;
-                                    for(int i=0; i<img.size(); i++){
-                                        if(img.get(i).getPath().equals(gi.getPath())){
-                                            flag = false;
-                                            break;
+                                        gi.setRd(resized);
+                                        gi.setD(myBitmap);
+                                        gi.setPath(absolutePathOfImage);
+                                        boolean flag = true;
+                                        for (int i = 0; i < img.size(); i++) {
+                                            if (img.get(i).getPath().equals(gi.getPath())) {
+                                                flag = false;
+                                                break;
+                                            }
+                                        }
+                                        if (flag) {
+                                            img.add(gi);
+                                            adapter.notifyDataSetChanged();
                                         }
                                     }
-                                    if(flag) {
-                                        img.add(gi);
-                                        adapter.notifyDataSetChanged();
-                                    }
+                                    check++;
                                 }
                             }
                         } catch (IOException e) {

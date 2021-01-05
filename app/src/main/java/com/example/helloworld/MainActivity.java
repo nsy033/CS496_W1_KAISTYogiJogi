@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -82,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
         cursor = getContentResolver().query(uri, projection, null,null, null);
 
         column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-        while (cursor.moveToNext()) {
+        int check = 0;
+        while (cursor.moveToNext() && check <=15) {
             absolutePathOfImage = cursor.getString(column_index_data);
             File files = new File(absolutePathOfImage);
             //Bitmap myBitmap = null;
@@ -98,15 +101,25 @@ public class MainActivity extends AppCompatActivity {
             Drawable rd = new BitmapDrawable(getResources(), resized);
             gi.setRd(rd);
             gi.setD(d);*/
+            Bitmap bitmap = null;
+            if (Build.VERSION.SDK_INT >= 29){
+                ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(),Uri.fromFile(files));
+                bitmap = ImageDecoder.decodeBitmap(source);
+            }
+            else{
+                bitmap = BitmapFactory.decodeFile(absolutePathOfImage);
+            }
+            if(bitmap != null) {
+                int w = bitmap.getWidth();
+                int h = bitmap.getHeight();
+                Bitmap resized = Bitmap.createScaledBitmap( bitmap, w/5, h/5, true );
+                gi.setD(bitmap);
+                gi.setRd(resized);
+                gi.setPath(absolutePathOfImage);
+                img.add(gi);
+            }
 
-            Bitmap bitmap = BitmapFactory.decodeFile(absolutePathOfImage);
-            int w = bitmap.getWidth();
-            int h = bitmap.getHeight();
-            Bitmap resized = Bitmap.createScaledBitmap( bitmap, w/5, h/5, true );
-            gi.setD(bitmap);
-            gi.setRd(resized);
-            gi.setPath(absolutePathOfImage);
-            img.add(gi);
+            check++;
         }
     }
 

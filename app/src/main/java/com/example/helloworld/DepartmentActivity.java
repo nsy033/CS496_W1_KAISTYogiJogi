@@ -91,6 +91,16 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE|
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE|
+                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION|
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|
+                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                        View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         //
         // Inflate the layout for this fragment
         //
@@ -104,6 +114,7 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
         departmentList = Page3Fragment.departmentItemList;                   //activity에 ArrayList<Custom>을 어떻게 줘야하는질 몰라서 static 변수 사용.
 
         //view_id 가져오는 부분
+        TextView tv_dep_info= (TextView) findViewById(R.id.dep_info);
         TextView tv_dep_name= (TextView) findViewById(R.id.dep_name);
         TextView tv_building_num = (TextView) findViewById(R.id.building_num);
         TextView tv_king_phone_number = (TextView) findViewById(R.id.king_phone_number);
@@ -112,7 +123,11 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
         TextView tv_admin_email = (TextView) findViewById(R.id.admin_email);
 
 
+
         //view에 데이터 입력.
+        tv_dep_info
+                  .setText("   " +Page3Fragment.dep_name_for_spinner[position+1]+ "   ");
+        //        .setText("   " + departmentList.get(position).getDep_name()+ "   ");
         tv_dep_name
                 .setText(departmentList.get(position).getDep_name());
         tv_building_num
@@ -189,7 +204,7 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
         mMap = googleMap;
 
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
-        //지도의 초기위치를 서울로 이동
+        //지도의 초기위치를 설정
         setDefaultLocation();
 
         //런타임 퍼미션 처리
@@ -395,8 +410,8 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(currentLatLng);
+
+
         //markerOptions.title(markerTitle);
         //markerOptions.snippet(markerSnippet);
 
@@ -410,6 +425,8 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
         mMap.addMarker(markerOptions1);
 
 
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(currentLatLng);
         markerOptions.title("현재위치");
         double distance = getDistance(now_building,currentLatLng);
         distance = Math.round(distance*100)/100.0;
@@ -430,8 +447,9 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
 
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-        mMap.moveCamera(cameraUpdate);
+        //카메라 제어
+        //CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
+        //mMap.moveCamera(cameraUpdate);
 
     }
 
@@ -440,7 +458,7 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
 
         //디폴트 위치, Seoul
 
-        LatLng DEFAULT_LOCATION = new LatLng(36.37232,127.36030);
+        LatLng DEFAULT_LOCATION = new LatLng(36.36688,127.36231);
         String markerTitle = "위치정보 가져올 수 없음";
         String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
 

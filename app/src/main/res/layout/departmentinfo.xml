@@ -4,23 +4,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF"
     tools:context=".DepartmentActivity">
 
-    <ScrollView
+    <com.google.android.material.circularreveal.CircularRevealFrameLayout
+        android:id="@+id/layout_dep"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+
+        <!-- fragment에서 하는법
+        <com.google.android.gms.maps.MapView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+        -->
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/customborder"
+            android:gravity="center"
+            tools:context=".MapsActivity">></fragment>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="top|left"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="center_horizontal|top"
+                android:background="@android:color/transparent"
+                android:text=""></TextView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal|top"
+                    android:background="@android:color/transparent"
+                    android:text=""></TextView>
+                <TextView
+                    android:id="@+id/dep_info"
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/rounded_corner"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Chemical and BioMolecular Engineering"
+                    android:textColor="#53370D"
+                    android:textSize="13sp"
+                    android:textStyle="bold"></TextView>
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="bottom"
+
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/layout_dep"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginTop="3dp"
                 android:background="#FFFFFF"
+<<<<<<< Updated upstream
                 android:orientation="vertical"
                 android:paddingLeft="16dp"
                 android:paddingTop="15dp"
@@ -32,13 +92,42 @@
                     android:layout_height="50dp"
                     android:gravity="center|center_vertical"
                     android:text="Department Info"
+=======
+                android:orientation="horizontal"
+                android:weightSum="20">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1.25"
+                    android:paddingLeft="7dp"
+                    app:srcCompat="@drawable/university" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5.75"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:text="Department"
+>>>>>>> Stashed changes
                     android:textColor="#53370D"
-                    android:textSize="24sp"
                     android:textStyle="bold"></TextView>
 
-                <!-- fragment에서 하는법
-            <com.google.android.gms.maps.MapView
+                <TextView
+                    android:id="@+id/dep_name"
+                    android:layout_width="00dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="13"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="9dp"
+                    android:text="New Text"
+                    android:textColor="#53370D"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
+<<<<<<< Updated upstream
                 android:layout_height="300dp"
                 android:id="@+id/map"
                 tools:context=".MapsActivity"
@@ -260,10 +349,66 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textColor="#53370D"></TextView>
+=======
+                android:layout_height="38dp"
+                android:background="#FFFFFF"
+                android:orientation="horizontal"
+                android:weightSum="20">
 
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.25"
+                    android:paddingLeft="7dp"
+                    app:srcCompat="@drawable/building" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="5.75"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:text="Building"
+                    android:textColor="#53370D"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/building_num"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="13"
+>>>>>>> Stashed changes
+                    android:gravity="center_vertical"
+                    android:paddingLeft="9dp"
+                    android:text="New Text"
+                    android:textColor="#53370D"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="#FFFFFF"
+                android:orientation="horizontal"
+                android:weightSum="20">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.25"
+                    android:paddingLeft="7dp"
+                    app:srcCompat="@drawable/phone" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="5.75"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:text="Head Tel"
+                    android:textColor="#53370D"
+                    android:textStyle="bold"></TextView>
+
+<<<<<<< Updated upstream
                 <Button
                     android:id="@+id/button_go_web"
                     android:layout_width="match_parent"
@@ -273,9 +418,136 @@
                     android:text="Go to the Homepage"
                     android:textColor="#53370D"
                     app:iconTint="#FBEAEA" />
-
+=======
+                <TextView
+                    android:id="@+id/king_phone_number"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="13"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="9dp"
+                    android:text="New Text"
+                    android:textColor="#53370D"></TextView>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="#FFFFFF"
+                android:orientation="horizontal"
+                android:weightSum="20">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.25"
+                    android:paddingLeft="7dp"
+                    app:srcCompat="@drawable/email" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="5.75"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:text="Head E-mail"
+                    android:textColor="#53370D"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/king_email"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="13"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="9dp"
+                    android:text="New Text"
+                    android:textColor="#53370D"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="#FFFFFF"
+                android:orientation="horizontal"
+                android:weightSum="20">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.25"
+                    android:paddingLeft="7dp"
+                    app:srcCompat="@drawable/phone" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="5.75"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:text="Staff Tel"
+                    android:textColor="#53370D"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/admin_phone_number"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="13"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="9dp"
+                    android:text="New Text"
+                    android:textColor="#53370D"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="#FFFFFF"
+                android:orientation="horizontal"
+                android:weightSum="20">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.25"
+                    android:paddingLeft="7dp"
+                    app:srcCompat="@drawable/email" />
+>>>>>>> Stashed changes
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="5.75"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"
+                    android:text="Staff E-mail"
+                    android:textColor="#53370D"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/admin_email"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="13"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="9dp"
+                    android:text="New Text"
+                    android:textColor="#53370D"></TextView>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_go_web"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:backgroundTint="@color/white"
+                android:backgroundTintMode="screen"
+                android:text="Go to the Homepage"
+                android:textColor="#969696"
+                app:iconTint="#FBEAEA" />
+
+            <!-- android:background="@drawable/buttonstyle" -->
         </LinearLayout>
-    </ScrollView>
+    </com.google.android.material.circularreveal.CircularRevealFrameLayout>
 
 </FrameLayout>

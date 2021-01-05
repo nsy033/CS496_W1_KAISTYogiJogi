@@ -78,7 +78,10 @@ public class Page1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.page1, null) ;
+
+
         contactItems.clear();
         ((MainActivity) getContext()).getContactList();
 
@@ -96,6 +99,7 @@ public class Page1Fragment extends Fragment {
         btn2.setScaleType(ImageButton.ScaleType.FIT_CENTER);
         ImageButton btn3 = (ImageButton) view.findViewById(R.id.button4);
         btn3.setScaleType(ImageButton.ScaleType.FIT_CENTER);
+
 
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
@@ -213,7 +217,11 @@ public class Page1Fragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 String name = edt.getText().toString();
+<<<<<<< Updated upstream
                                 int[] index = new int[1000];
+=======
+                                int[] index = new int[10000];
+>>>>>>> Stashed changes
                                 int count=0;
                                 //edt.setText("Helloworld");
 
@@ -280,7 +288,7 @@ public class Page1Fragment extends Fragment {
                 listview.setAdapter(adapter);
             }
         });
-
+        
         adapter.clearItem();
         for(int i = 0; i< contactItems.size() ; i++){
 
