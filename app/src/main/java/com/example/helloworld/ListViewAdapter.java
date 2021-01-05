@@ -8,8 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.provider.ContactsContract;
@@ -22,8 +22,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -158,7 +156,7 @@ public class ListViewAdapter extends BaseAdapter {
                                 String add = edt4.getText().toString();
 
                                 ListViewItem tmp = new ListViewItem();
-                                tmp.setIcon(ContextCompat.getDrawable(context, R.drawable.iconuser));
+                                tmp.setIcon(MainActivity.sized[0]);
                                 tmp.setTitle(name);
                                 tmp.setDesc(number);
                                 tmp.setMail(mail);
@@ -286,7 +284,7 @@ public class ListViewAdapter extends BaseAdapter {
         ListViewItem listViewItem = listViewItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        iconImageView.setImageDrawable(listViewItem.getIcon());
+        iconImageView.setImageBitmap(listViewItem.getIcon());
         titleTextView.setText(listViewItem.getTitle());
         descTextView.setText(listViewItem.getDesc());
 
@@ -306,7 +304,7 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(Drawable icon, String title, String desc, String mail, String address) {
+    public void addItem(Bitmap icon, String title, String desc, String mail, String address) {
         ListViewItem item = new ListViewItem();
 
         item.setIcon(icon);

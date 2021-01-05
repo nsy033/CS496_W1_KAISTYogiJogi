@@ -19,30 +19,30 @@
         android:layout_marginRight="8dp"
         android:columnWidth="100dp"
         android:numColumns="4"
-        android:paddingTop="45dp"></GridView>
+        android:paddingTop="100dp"></GridView>
 
 
     <Spinner
         android:id="@+id/spinner1"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom|center_horizontal|left"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_gravity="center_horizontal|top|left"
         android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/spinner_background"
         android:backgroundTint="#7EF4F4F2"
-        android:spinnerMode="dropdown"
-        android:layout_marginBottom="35dp" />
+        android:spinnerMode="dropdown" />
 
     <ImageButton
         android:id="@+id/button_go_dep"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_gravity="bottom|right"
+        android:layout_marginBottom="12dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="15dp"
-        android:src="@drawable/go"
-        android:background="@android:color/transparent"
-        android:text="Go" />
+        android:background="@android:color/transparent" />
 
 
 </FrameLayout>

@@ -259,26 +259,17 @@
                         android:textColor="#53370D"></TextView>
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textColor="#53370D"></TextView>
-
-                <Button
-                    android:id="@+id/button_go_web"
-                    android:layout_width="match_parent"
-                    android:layout_height="38dp"
-                    android:layout_gravity="center"
-
-                    android:background="@drawable/buttonstyle"
-                    android:text="Go to the Homepage"
-                    android:textColor="#969696"
-                    app:iconTint="#FBEAEA" />
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/button_go_web"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="14dp"
+        android:layout_marginRight="12dp"
+        android:background="@android:color/transparent" />
 
 </FrameLayout>

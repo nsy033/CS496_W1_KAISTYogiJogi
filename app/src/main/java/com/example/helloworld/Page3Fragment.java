@@ -1,9 +1,6 @@
 package com.example.helloworld;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +22,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import static com.example.helloworld.MainActivity.kaist;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,11 +68,10 @@ public class Page3Fragment extends Fragment {
         gridview.setAdapter(adapter);
         adapter = add_item_to_gridviewadapter(adapter);
 
-
         //Spinner adapter
-        String dep_name_for_spinner[] = { " - Choose Department - ", "Civil and Environmental Engineering", "Business Technological Management",
+        String dep_name_for_spinner[] = { " - Choose Department - ", "Civil and Environmental Engineering", "Business Technology Management",
                 "Mechanical Engineering", "Physics", "Bio and Brain Engineering",
-                "Industrial and Systemic Engineering", "Biological Sciences", "Chemical and Biomolecular Engineering", "Industrial Design",
+                "Industrial and Systems Engineering", "Biological Sciences", "Chemical and Biomolecular Engineering", "Industrial Design",
                 "Mathematical Sciences", "Materials Science and Engineering", "Nuclear and Quantum Engineering",
                 "Electrical Engineering", "School of Computing", "Chemistry", "Aerospace Engineering" };
 
@@ -86,6 +84,7 @@ public class Page3Fragment extends Fragment {
         //Button Control, Listener
         //
         ImageButton button1 = (ImageButton) view.findViewById(R.id.button_go_dep);
+        button1.setImageBitmap(MainActivity.sized[4]);
         button1.setScaleType(ImageButton.ScaleType.FIT_CENTER);
 
         button1.setOnClickListener(new Button.OnClickListener() {
@@ -143,15 +142,9 @@ public class Page3Fragment extends Fragment {
         json = getJsonString("DepartmentInformation.json");
         jsonParsing(json); // arraylist<childfragmentitem> 에 들어가게 됨.
 
-
         for(int i=0; i<dep_icon.length;i++){
-
-            Bitmap tmpb = BitmapFactory.decodeResource(getResources(), dep_icon[i]);
-            int w = tmpb.getWidth();
-            int h = tmpb.getHeight();
-            Bitmap resized = Bitmap.createScaledBitmap( tmpb, w/10, h/10, true );
-
-            myadapter.addItem(new BitmapDrawable(getResources(), resized), dep_name[i]); //건설환경공학과
+            GridViewItemKaist gk = kaist.get(i);
+            myadapter.addItem(gk.getIcon(), gk.getStr()); //건설환경공학과
         }
 
         return myadapter;

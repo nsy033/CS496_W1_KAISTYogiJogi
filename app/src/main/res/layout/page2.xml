@@ -21,7 +21,7 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_gravity="bottom|right"
-        android:layout_margin="15dp"
+        android:layout_margin="12dp"
         android:background="@android:color/transparent"
         android:src="@drawable/iconcamera" />
 

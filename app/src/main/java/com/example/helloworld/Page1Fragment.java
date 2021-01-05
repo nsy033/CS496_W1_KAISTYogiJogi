@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 import static com.example.helloworld.MainActivity.contactItems;
-import static com.example.helloworld.MainActivity.iconuser;
+import static com.example.helloworld.MainActivity.sized;
 
 //import static com.example.helloworld.MainActivity.contactList;
 
@@ -91,10 +91,13 @@ public class Page1Fragment extends Fragment {
         listview.setAdapter(adapter);
 
         ImageButton btn = (ImageButton) view.findViewById(R.id.button2);
+        btn.setImageBitmap(sized[3]);
         btn.setScaleType(ImageButton.ScaleType.FIT_CENTER);
         ImageButton btn2 = (ImageButton) view.findViewById(R.id.button3);
+        btn2.setImageBitmap(sized[2]);
         btn2.setScaleType(ImageButton.ScaleType.FIT_CENTER);
         ImageButton btn3 = (ImageButton) view.findViewById(R.id.button4);
+        btn3.setImageBitmap(sized[1]);
         btn3.setScaleType(ImageButton.ScaleType.FIT_CENTER);
 
         btn.setOnClickListener(new View.OnClickListener(){
@@ -126,7 +129,7 @@ public class Page1Fragment extends Fragment {
 
                                     contactItems.add(con);
 
-                                    adapter.addItem(iconuser, con.getUser_name(), con.getUser_phNumber(),
+                                    adapter.addItem(sized[0], con.getUser_name(), con.getUser_phNumber(),
                                             con.getMail(), con.getAddress());
                                     adapter.notifyDataSetChanged();
                                     listview.setAdapter(adapter);
@@ -232,7 +235,7 @@ public class Page1Fragment extends Fragment {
                                     ContactItem con = contactItems.get(index[i]);
                                     //contactItems = new ArrayList<>();
                                     //contactItems.add(con);
-                                    adapter.addItem(iconuser, con.getUser_name(), con.getUser_phNumber(),
+                                    adapter.addItem(sized[0], con.getUser_name(), con.getUser_phNumber(),
                                             con.getMail(), con.getAddress());
                                 }
                             }
@@ -272,7 +275,7 @@ public class Page1Fragment extends Fragment {
                 for(int i = 0; i< contactItems.size() ; i++){
 
                     ContactItem ci = contactItems.get(i);
-                    adapter.addItem(iconuser, ci.getUser_name(), ci.getUser_phNumber(),
+                    adapter.addItem(sized[0], ci.getUser_name(), ci.getUser_phNumber(),
                             ci.getMail(), ci.getAddress());
 
                 }
@@ -285,7 +288,7 @@ public class Page1Fragment extends Fragment {
         for(int i = 0; i< contactItems.size() ; i++){
 
             ContactItem ci = contactItems.get(i);
-            adapter.addItem(iconuser, ci.getUser_name(), ci.getUser_phNumber(),
+            adapter.addItem(sized[0], ci.getUser_name(), ci.getUser_phNumber(),
                     ci.getMail(), ci.getAddress());
 
         }
