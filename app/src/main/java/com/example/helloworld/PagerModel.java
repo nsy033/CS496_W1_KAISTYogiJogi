@@ -1,7 +1,6 @@
 package com.example.helloworld;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 
 public class PagerModel {
     String id;
