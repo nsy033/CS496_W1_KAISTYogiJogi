@@ -107,13 +107,6 @@ public class Page2Fragment extends Fragment {
          }
 
 
-        img.clear();
-        try {
-            ((MainActivity) getContext()).getGallery();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         adapter = new MyGridAdapter(
                 getActivity().getApplicationContext(),
                 R.layout.dialog,       // GridView 항목의 레이아웃 row.xml
@@ -134,10 +127,8 @@ public class Page2Fragment extends Fragment {
                 gv.setAdapter(adapter);
             }
         });
-
         return view;
     }
-
 
     public class MyGridAdapter extends BaseAdapter {
         Context context;
@@ -313,13 +304,13 @@ public class Page2Fragment extends Fragment {
 
                                 String[] projection = { MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME };
 
-                                cursor = getActivity().getContentResolver().query(uri, projection, null,null, null);
+                                cursor = getActivity().getContentResolver().query(uri, projection, null,null, MediaStore.Images.Media.DATE_TAKEN + " DESC");
 
                                 column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
                                 column_index_folder_name = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
 
                                 int check = 0;
-                                while (cursor.moveToNext() && check<=31) {
+                                while (cursor.moveToNext() && check<=30) {
                                     absolutePathOfImage = cursor.getString(column_index_data);
                                     File files = new File(absolutePathOfImage);
                                     Bitmap myBitmap = null;
@@ -393,18 +384,19 @@ public class Page2Fragment extends Fragment {
         pager.setAdapter(adapter2);
         //pager.setPageTransformer(true, new ZoomOutPageTransformer());
         pager.setCurrentItem(position);
+
         Button button1 = (Button) dialog.findViewById(R.id.cropbutton); //crop
         button1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CropActivity.class);
                 intent.putExtra("path", img.get(pager.getCurrentItem()).getPath());
-
                 startActivityForResult(intent, REQUEST_CROP_PHOTO);
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();
                 adapter.notifyDataSetChanged();
             }
         });
+
         Button button2 = (Button) dialog.findViewById(R.id.cancelbutton); //cancel
         button2.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {

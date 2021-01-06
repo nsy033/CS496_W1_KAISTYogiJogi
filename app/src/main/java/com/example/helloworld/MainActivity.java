@@ -5,11 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.ImageDecoder;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.graphics.Color;
+import android.graphics.ImageDecoder;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -138,11 +135,11 @@ public class MainActivity extends AppCompatActivity {
 
         String[] projection = { MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME };
 
-        cursor = getContentResolver().query(uri, projection, null,null, null);
+        cursor = getContentResolver().query(uri, projection, null,null, MediaStore.Images.Media.DATE_TAKEN + " DESC");
 
         column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
         int check = 0;
-        while (cursor.moveToNext() && check <=15) {
+        while (cursor.moveToNext() && check <=30) {
             absolutePathOfImage = cursor.getString(column_index_data);
             File files = new File(absolutePathOfImage);
             //Bitmap myBitmap = null;
