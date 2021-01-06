@@ -86,18 +86,13 @@ public class fragment3 extends Fragment {
         button1.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(getActivity(),DepartmentActivity.class);
                 intent.putExtra("position", check_pos_for_button);
                 intent.putExtra("dep_icon",dep_icon);
                 intent.putExtra("dep_name",dep_name);
                 startActivity(intent);
-                /**
-                Fragment newFragment = new DepartmentActivity(check_pos_for_button, dep_icon, dep_name, childFragmentItemList);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.parent_id, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                 */
+
             }
         });
 
@@ -112,13 +107,7 @@ public class fragment3 extends Fragment {
                 intent.putExtra("dep_icon",dep_icon);
                 intent.putExtra("dep_name",dep_name);
                 startActivity(intent);
-                /**
-                Fragment newFragment = new DepartmentActivity(position, dep_icon, dep_name, childFragmentItemList);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.parent_id, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                 */
+
             }
         });
 

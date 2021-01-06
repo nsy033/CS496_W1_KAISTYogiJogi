@@ -111,7 +111,6 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
         TextView tv_admin_phone_number = (TextView) findViewById(R.id.admin_phone_number);
         TextView tv_admin_email = (TextView) findViewById(R.id.admin_email);
 
-
         //view에 데이터 입력.
         tv_dep_name.setText("학과이름 : " + departmentList.get(position).getDep_name());
         tv_building_num.setText("건물이름 : " + departmentList.get(position).getDep_num());
@@ -605,43 +604,4 @@ public class DepartmentActivity extends AppCompatActivity implements OnMapReadyC
         distance = locationA.distanceTo(locationB);
         return distance;
     }
-
-    /**
-     * fragment에서 google map을 사용하기 위한 함수들.
-    @Override
-    public void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onLowMemory();
-    }
-    */
 }

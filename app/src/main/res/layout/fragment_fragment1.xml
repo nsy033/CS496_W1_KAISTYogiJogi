@@ -3,13 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6A4C0"
-    tools:context=".fragment1" >
-
+    android:orientation="vertical">
     <ListView
         android:id="@+id/listview1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        android:paddingTop="47dp"/>
+        android:divider = "#B6A570"
+        android:dividerHeight="2px"
+        android:paddingTop="40dp">
+
+    </ListView>
+
+    <ImageButton
+        android:id="@+id/button2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="20dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/iconadd" />
+
+    <ImageButton
+        android:id="@+id/button3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="top|right"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="113dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/iconsearch" />
+
+    <ImageButton
+        android:id="@+id/button4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="top|right"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="0dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/iconhome" />
+
 </FrameLayout>
